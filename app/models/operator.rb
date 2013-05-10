@@ -64,11 +64,16 @@ class Operator < ActiveRecord::Base
     login_languages = self.languages
     login_languages = [] if login_languages.nil?
     rates = self.rate_overall
+    if self.session_update.nil?
+      online = false
+    else
+      online = DateTime.now < self.session_update.to_datetime + 5.minutes
+    end
     return {
       "operator_login_number" =>login_name,
       "operator_name"         =>login_display_name,
       "short_bio"=>login_short_bio,
-      "online_offline"=>true,
+      "online_offline"=>online,
       "avatar"=>root_url+self.display_avatar.url(:original, false),
       "thumbnail"=>root_url+self.display_avatar.url(:medium, false),
       "language"=>self.languages,
