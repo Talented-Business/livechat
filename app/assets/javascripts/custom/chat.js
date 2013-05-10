@@ -12,7 +12,7 @@ jQuery(document).ready(function(){
 		enterMessage();
 	});
 	
-	jQuery('.messagebox textarea').keypress(function(e){
+	jQuery('.messagebox textarea').keyup(function(e){
 		if(e.which == 13){
       enterMessage();
       $("#new_chat_message").submit();
