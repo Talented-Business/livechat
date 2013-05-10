@@ -216,39 +216,12 @@ class WebserviseController < ApplicationController
     render :json=>{"error"=>"Nothing current session ",:status =>403},:status =>200
   end
   def getmessagelist
-    if params.has_key?(:start_datetime)
-      start_datetime = params[:start_datetime]
-      begin
-        start_datetime = start_datetime.to_datetime
-      rescue
-        render :json=>{"error"=>"Start_date is invalid",:status =>410},:status =>200 and return
-      end
-    else
-      render :json=>{"error"=>"Start_date is empty",:status =>410},:status =>200 and return
-    end  
-    end_datetime = DateTime.now
-    if params.has_key?(:end_datetime)
-      end_datetime = params[:end_datetime]
-      begin
-        end_datetime = end_datetime.to_datetime
-      rescue
-        render :json=>{"error"=>"End_date is invalid",:status =>410},:status =>200 and return
-      end
-    end
     begin
-      chat_messages = ChatMessage.where("created_at >= ? and created_at <= ? and user_id = ? and operator_id = ?",start_datetime, end_datetime, @chat_user.id, @operator.id)
+      s = @chat_user.getlastmessage(@operator)
+      render :json=>{"messages"=>s.chat_history,:status =>200},:status =>200
     rescue
       render :json=>{"error"=>@chat_user.to_json.to_s+@operator.to_json.to_s+"chat_messages query is invalid",:status =>410},:status =>200 and return
     end
-    messages = []
-    chat_messages.each do |message|
-      m =Hash.new 
-      m['direction']  = message.direction
-      m['sent_date']  = message.created_at.to_s
-      m['message']    = message.message
-      messages.push m
-    end
-    render :json=>{"messages"=>messages,:status =>200},:status =>200
   end
 
   def sendmessage
