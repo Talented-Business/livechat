@@ -25,7 +25,7 @@ class Ability
         can :read, Note        
       end
       if permission.outside_shift
-        
+        can :work_page, Schedule 
       end
       if permission.schedule
         
