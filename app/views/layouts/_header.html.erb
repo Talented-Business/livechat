@@ -4,7 +4,7 @@
     <div class="headright"><!--headercolumn--><!--headercolumn-->
       <div class="headercolumn" id="userPanel">
         <a class="userinfo radius2" href="">
-          <%= image_tag("avatar.png") %>
+          <%= image_tag current_operator.display_avatar.url(:small, false) %>
           <span><strong><%= current_operator.name  %> </strong></span>
         </a>
         <div class="userdrop">

@@ -155,7 +155,11 @@ class User < ActiveRecord::Base
   end
   def last_message(op)
     s = getlastmessage(op)
-    return s.chat_messages.last
+    if s.nil?
+      return nil
+    else
+      return s.chat_messages.last
+    end
   end
   private
   def generate_token(column)
