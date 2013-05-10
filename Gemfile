@@ -1,5 +1,5 @@
 source 'https://rubygems.org'
-#ruby "1.9.3"
+ruby "1.9.3"
 gem 'rails', '3.2.13'
 
 # Bundle edge Rails instead:
@@ -13,6 +13,7 @@ gem 'rolify'
 gem 'carmen-rails', '~> 1.0.0.beta3'
 gem 'country-select'
 gem 'will_paginate', '~> 3.0'
+gem 'whenever', :require => false
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do

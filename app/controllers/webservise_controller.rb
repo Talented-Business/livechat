@@ -78,7 +78,8 @@ class WebserviseController < ApplicationController
     unless workable_ops.count == 0
       min = -1
       min_op = nil
-      workable_ops.each do |op|
+      workable_ops.each do |schedule|
+        op = schedule.operator
         c = op.get_chat_users_count
         if c < min || min == -1
           min = c
