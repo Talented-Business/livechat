@@ -145,13 +145,12 @@ class WebserviseController < ApplicationController
       },:status =>200
   end
 
-  def setusersetting
+  def changepassword
     name = params[:login_number]
     if params.has_key?(:old_password) && params[:old_password] != ""
       password = params[:old_password]
       if @chat_user.encrypted_password == Digest::MD5.hexdigest(password)
         data = {}
-        data[:avatar] = params[:userfile] if params.has_key?(:userfile)
         data[:encrypted_password] = Digest::MD5.hexdigest(params[:new_password])
         if @chat_user.update_attributes(data)
           render :json=>{"result"=>"Successfully updated",:status =>200},:status =>200
@@ -163,6 +162,16 @@ class WebserviseController < ApplicationController
       end
     else
       render :json=>{"error"=>"Please provide old password.",:status =>410},:status =>200
+    end
+  end
+  def changeavatar
+    name = params[:login_number]
+    data = {}
+    data[:avatar] = params[:userfile] if params.has_key?(:userfile)
+    if @chat_user.update_attributes(data)
+      render :json=>{"result"=>"Successfully updated",:status =>200},:status =>200
+    else
+      render :json=>{"error"=>@chat_user.errors.messages,:status =>410},:status =>200
     end
   end
   def getuserinfo
