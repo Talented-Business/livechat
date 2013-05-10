@@ -19,11 +19,11 @@ class Operator < ActiveRecord::Base
   has_attached_file :avatar, styles: { medium: "65x65#", small: "40x40#" },
                              default_url: 'avatar3.png',
                              path: ":rails_root/public/system/:class/avatar/:id/:style",
-                             url: "/system/:class/avatar/:id/:style"
+                             url: "system/:class/avatar/:id/:style"
   has_attached_file :display_avatar, styles: { medium: "65x65#", small: "40x40#" },
                              default_url: 'avatar2.png',
                              path: ":rails_root/public/system/:class/display/:id/:style",
-                             url: "/system/:class/display/:id/:style"
+                             url: "system/:class/display/:id/:style"
   has_many  :topics, :dependent => :destroy
   has_many  :chat_messages, :dependent => :destroy
   has_many  :rates, :dependent => :destroy
@@ -63,6 +63,7 @@ class Operator < ActiveRecord::Base
     login_short_bio = "" if login_short_bio.nil?
     login_languages = self.languages
     login_languages = [] if login_languages.nil?
+    rates = self.rate_overall
     return {
       "operator_login_number" =>login_name,
       "operator_name"         =>login_display_name,
@@ -70,7 +71,7 @@ class Operator < ActiveRecord::Base
       "online_offline"=>true,
       "avatar"=>root_url+self.display_avatar.url(:small, false),
       "language"=>self.languages,
-      "rate"=>5
+      "rate"=>(rates[0] + rates[1] +rates[2] + rates[3])/4
     }
   end
   def get_chat_users_count(t = DateTime.now)
