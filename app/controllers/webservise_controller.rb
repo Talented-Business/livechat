@@ -122,11 +122,16 @@ class WebserviseController < ApplicationController
     login_languages = [] if login_languages.nil?
     login_long_bio = @operator.long_bio
     login_long_bio = "" if login_long_bio.nil?
+    if @operator.session_update.nil?
+      online = false
+    else
+      online = DateTime.now < @operator.session_update.to_datetime + 5.minutes
+    end
     render :json=>{"operator"=>{
         "operator_login_number"=>login_name,
         "operator_name"=>login_display_name,
         "short_bio"=>login_short_bio,
-        "online_offline"=>true,
+        "online_offline"=>online,
         "avatar"=>root_url+@operator.display_avatar.url(:original, false),
         "thumbnail"=>root_url+@operator.display_avatar.url(:medium, false),
         "long_bio"=>login_long_bio,
