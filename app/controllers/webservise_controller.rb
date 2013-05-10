@@ -218,7 +218,11 @@ class WebserviseController < ApplicationController
   def getmessagelist
     begin
       s = @chat_user.getlastmessage(@operator)
-      render :json=>{"messages"=>s.chat_history,:status =>200},:status =>200
+      unless s.nil?
+        render :json=>{"messages"=>s.chat_history,:status =>200},:status =>200
+      else
+        render :json=>{"messages"=>[],:status =>200},:status =>200
+      end
     rescue
       render :json=>{"error"=>@chat_user.to_json.to_s+@operator.to_json.to_s+"chat_messages query is invalid",:status =>410},:status =>200 and return
     end
