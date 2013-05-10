@@ -1,0 +1,74 @@
+<% content_for :menu do %>
+  <ul class="maintabmenu multipletabmenu">
+    <li>
+      <%= link_to "Real Identification", edit_admin_operator_path(@operator) %>
+    </li>
+    <li>
+      <%= link_to "Session History", session_history_admin_operator_path(@operator) %>
+    </li>
+    <li class="current">
+      <%= link_to "Attendance History", attendance_history_admin_operator_path(@operator) %>
+    </li>
+    <li>
+      <%= link_to "Display Profile", profile_admin_operator_path(@operator) %>
+    </li>
+  </ul>
+<% end %>
+<table style="width:100%" class="fc-header">
+  <tbody>
+    <tr>
+      <td class="fc-header-left">
+        <span class="fc-button-content">&nbsp;</span>
+      </td>
+      <td class="fc-header-center">
+        <span class="schedule-week-during">
+          <% thedate = @thedate.beginning_of_week 
+             weekenddate = @thedate.end_of_week  %>
+          <h2><%= thedate.strftime("%b %e"); %>  &mdash; <%= weekenddate.strftime("%b %e %Y"); %></h2>
+        </span>
+      </td>
+      <td class="fc-header-right">
+        <span class="schedule-week-today fc-button"><%= link_to "today", attendance_history_admin_operator_path(@operator) %></span>
+        <span class="schedule-week-previous fc-button">
+          <%=link_to "«", attendance_by_date_admin_operator_path(@operator, thedate-7) %>
+        </span>
+        <span class="schedule-week-next fc-button">
+          <%=link_to "»", attendance_by_date_admin_operator_path(@operator, thedate+7) %>
+        </span>  
+      </td>
+    </tr>
+  </tbody>
+</table>
+<div class="schedule_management">
+<table class="stdtable" border="0" cellpadding="0" cellspacing="0">
+  <colgroup>
+    <col class="con0">
+    <col class="con1">
+    <col class="con0">
+    <col class="con1">
+    <col class="con0">
+  </colgroup>
+  <thead>
+    <tr>
+      <th class="head0">Week</th>
+      <% today = Date.today
+        (0..11).each do | d | %>
+        <th class="head1"><%= d*2 %></th>
+        <th class="head0"><%= d*2+1 %></th>
+      <% end %>  
+    </tr>
+  </thead>
+  <tbody>
+    <%  (0..6).each do |w| %>
+      <tr>
+        <td><%= (thedate+w).strftime("%a, %d/%m") %> </td>
+        <% (0..23).each do |num| %>
+          <td class="" id="td_<%=  (w.to_s+"_"+num.to_s) %>">
+            <span><%= shift_status(@op_schedules[w][num], thedate+w, num) %>&nbsp;</span>
+          </td>
+        <% end %>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+</div>

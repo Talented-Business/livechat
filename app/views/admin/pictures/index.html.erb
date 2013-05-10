@@ -1,0 +1,46 @@
+<% content_for :menu do %>
+  <ul class='maintabmenu'><li class='current'><a href='javascript:void(0)'>Pictures</a></li></ul>
+<% end %>
+    <div class="contenttitle radiusbottom0">
+      <h2 class="editor"><span>Pictures</span></h2>
+    </div>
+    <div class="actionBar">
+      <%= link_to "Add new picture",new_admin_picture_path %>
+    </div>
+    <!--contenttitle-->
+    <table class="stdtable" border="0" cellpadding="0" cellspacing="0">
+      <colgroup>
+        <col class="con0">
+        <col class="con1">
+        <col class="con0">
+        <col class="con1">
+        <col class="con0">
+      </colgroup>
+      <thead>
+        <tr>
+          <th class="head0" width="7%">No</th>
+          <th class="head1" width="15%">Name</th>
+          <th class="head0" width="18%">Thumbnail</th>
+          <th class="head1" width="28%">Description</th>
+          <th class="head0" width="15%">Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% if @pictures.count >0 %>
+          <% @pictures.each do |picture| %>
+            <tr>
+              <td><%= (@pictures.index(picture)+1).to_s %></td>
+              <td><%= picture.name %></td>
+              <td class="center"><%= image_tag picture.image.url(:thumbnail,false) %>&nbsp;</td>
+              <td><%= picture.description %>&nbsp;</td>
+              <td><%= link_to "Edit",edit_admin_picture_path(picture) %> & <%= link_to "Delete", delete_admin_picture_path(picture) %></td>
+            </tr>
+          <% end %>
+        <% else %>
+          <tr>
+            <td colspan="5"> No Pictures</td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table><br>
+  

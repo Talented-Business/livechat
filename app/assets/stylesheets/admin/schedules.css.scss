@@ -1,0 +1,108 @@
+// Place all the styles related to the admin/schedules controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+.schedule_management{
+  overflow: auto;
+}
+.schedule-week-today{
+  padding:7px 10px 2px 10px!important;
+}
+.schedule-week-previous,.schedule-week-next{
+  font-size:24px;
+}
+.schedule-week-during{
+  border-radius: 2px 2px 2px 2px;
+  margin-right: 10px;
+}
+.fc-button{
+  background: url("../titlebg.png") repeat-x scroll left top transparent;
+  border: 1px solid #CCCCCC;
+  display: inline-block;
+  position: relative;
+  white-space: nowrap;
+  padding: 0 10px;
+  cursor: pointer;
+  a{
+    color:#666666;
+  }
+}
+.fc-button:hover, .fc-button a:hover { background: #000;color:#fff;text-decoration: none; }
+.fc-header-right form{display:inline;}
+.schedule_management{
+  .bookable, .full_not{
+    background-color:blue;
+    span{
+      color:white;
+      cursor: pointer;
+        a{
+        color:white;
+      }
+    }  
+  }
+  .bookable:hover, .full_not:hover{
+    background-color:#3333ff;
+  }
+  .booked,.full_fill{
+    background-color:green;
+    span{
+      color:white;
+      cursor: pointer;
+        a{
+        color:white;
+      }
+    }  
+  }
+  .booked:hover,.full_fill:hover{
+    background-color:#40a508;
+  }
+  span._span{
+        a{
+        color:#666666;
+      }
+  }
+  a:hover{
+    text-decoration: none;
+  }
+}
+.goto_workpage{
+  position:absolute;
+  span{
+    margin-left:0!important;
+  }
+}
+.workpage{
+   display: inline-block;
+  #chat{
+    width:57%;
+    float:left;
+    border: 1px solid #DDDDDD;
+  }
+  #userlist{
+    width:20%;
+    float:left;
+    th.head0{
+      width:50%;
+    }
+  }
+  .right{
+    width:20%;float:left;
+  }
+}
+.requests-holiday{
+  margin: auto;
+  padding: 30px 80px;
+  width: 600px;
+  input.date-pick{
+    width:100px;
+  }
+  .request-holiday{
+    float:none;
+    font-family: 'BebasNeueRegular',Arial,Helvetica,sans-serif;
+    padding-left: 10px;
+  }
+  select.request-holiday{
+    margin-left:30px;
+    width:80px;
+    min-width: 80px;
+  }
+}

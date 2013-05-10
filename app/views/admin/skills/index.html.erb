@@ -1,0 +1,46 @@
+<% content_for :menu do %>
+  <ul class='maintabmenu'><li class='current'><a href='javascript:void(0)'>Skills</a></li></ul>
+<% end %>
+    <div class="contenttitle radiusbottom0">
+      <h2 class="editor"><span>Skills</span></h2>
+    </div>
+    <div class="actionBar">
+      <%= link_to "Add new skill",new_admin_skill_path %>
+    </div>
+    <!--contenttitle-->
+    <table class="stdtable" border="0" cellpadding="0" cellspacing="0">
+      <colgroup>
+        <col class="con0">
+        <col class="con1">
+        <col class="con0">
+        <col class="con1">
+        <col class="con0">
+      </colgroup>
+      <thead>
+        <tr>
+          <th class="head0" width="7%">No</th>
+          <th class="head1" width="27%">Skill Name</th>
+          <th class="head0" width="28%">Skill Description</th>
+          <th class="head1" width="18%">Ops</th>
+          <th class="head0" width="15%">Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% if @skills.count >0 %>
+          <% @skills.each do |skill| %>
+            <tr>
+              <td><%= (@skills.index(skill)+1).to_s %></td>
+              <td><%= skill.name %></td>
+              <td><%= skill.description %>&nbsp;</td>
+              <td class="center"><%= skill.operators.count if skill.operators %>&nbsp;</td>
+              <td><%= link_to "Edit",edit_admin_skill_path(skill) %> & <%= link_to "Delete", delete_admin_skill_path(skill) %></td>
+            </tr>
+          <% end %>
+        <% else %>
+          <tr>
+            <td colspan="5"> No Skills</td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table><br>
+  

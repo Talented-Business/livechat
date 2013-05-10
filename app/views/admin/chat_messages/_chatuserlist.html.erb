@@ -1,0 +1,43 @@
+<% @users.each do |user | %>
+  <tr>
+    <td><%= link_to user.name, admin_chat_messages_path+"?user_id="+user.id.to_s, :remote=>true %></td>
+    <td><%= link_to "1", admin_chat_messages_path+"?user_id="+user.id.to_s, :remote=>true %></td>
+  </tr>
+<% end %>
+<script>
+  var temp_xhr = 0;
+  var real_check = function(){
+    if(temp_xhr!=0){temp_xhr.abort();}
+    temp_xhr = $.ajax({
+      url : '/admin/chat_messages/get_chat_users.json',
+      cache: false,
+      dataType: "json",
+      success: function(response){
+        var s = "", i=0, m=0;
+        for(k in response["users"]){
+          i++;
+          user = response["users"][k];
+          s += '<tr>'+
+                 '<td><a data-remote="true" href="/admin/chat_messages?user_id='+user.id+'">'+user.name+'</a></td>'+
+                 '<td><a data-remote="true" href="/admin/chat_messages?user_id='+user.id+'">'+user.waiting+'</a></td>'+
+               '</tr>';
+        }
+        if (response["new_messages"].length > 0 ){
+          for(k in response["new_messages"]){
+            jQuery('#chatmessageinner').append('<p><strong>'+response["new_messages"][k]['name']+':</strong>'+response["new_messages"][k]['message']+'</p>', function(){
+            });
+          }          
+          jQuery("#chatmessage").animate({scrollTop: jQuery("#chatmessage").prop("scrollHeight")});
+        }
+        if(i>0){
+          $('#userlist tbody').html(s);
+        }else{
+          $('#userlist tbody').html('');
+        }
+      }
+    });
+  };
+
+  var g_interval=setInterval(real_check, 6000);
+  real_check();
+</script>

@@ -1,0 +1,42 @@
+<% content_for :menu do %>
+  <ul class='maintabmenu'><li class='current'><a href='javascript:void(0)'>Messages for <%= @topic.subject%></a></li></ul>
+<% end %>
+<div class="contenttitle radiusbottom0">
+  <h2 class="editor"><span>Messages for <%= @topic.subject%></span></h2>
+</div>
+<%= render "header" %>
+<div class="messages_left">
+  <%= render "left" %>
+</div>
+<div class="messages_content">
+  <div class="message_list">
+    <div class="message_box">
+      <h1><span><%= @topic.subject%></span></h1>
+    </div>
+    <div class="new_message <%= "hide"  %> message_box row-fluid">
+      <h2>Reply</h2>
+      <%= form_for [:admin,@new_message], :remote => true do | f| %>
+        <input type="hidden" name="topic" value="<%= @topic.id %>">
+        <div class="span2">	
+          <a href="<%= @recipient_user ? user_url(@recipient_user) : "" %>" class="thumbnail">
+            <img data-src="holder.js/260x180" alt="" src="<%= @recipient_user ? @recipient_user.profile_photo_url : "" %>">
+          </a>
+        </div>
+        <div class="span7">	
+          <textarea name="msg" class="full_message_input" cols="80" rows="5"></textarea>
+        </div>
+        <div class="span2">
+          <input type="submit" value="Send" class="stdbtn">
+        </div>
+      <% end %>
+    </div>
+    <% if @messages.size == 0 %>
+      <div class="well empty-message">No Messages</div>
+    <% else %>
+      <% @messages.each do | m | %>
+        <%= render "message", :message => m %>
+        <div class="clearfix"></div>
+      <% end %>
+    <% end %>	
+  </div>
+</div>

@@ -1,0 +1,7 @@
+<% @chat_messages.each do |chat| %>
+  <% if chat.direction %>
+    <p><strong>You:</strong><%= chat.message%> </p>
+  <% else %>
+    <p><strong><%= chat.user.name%>:</strong><%= chat.message%></p>
+  <% end %>
+<% end %>

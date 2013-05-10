@@ -1,0 +1,161 @@
+<% content_for :menu do %>
+<ul class="maintabmenu multipletabmenu">
+  <li>
+    <%= link_to "Real Identification", edit_admin_operator_path(@operator) %>
+  </li>
+  <li>
+    <%= link_to "Session History", session_history_admin_operator_path(@operator) %>
+  </li>
+  <li>
+    <%= link_to "Attendance History", attendance_history_admin_operator_path(@operator) %>
+  </li>
+  <li class="current">
+    <%= link_to "Display Profile", profile_admin_operator_path(@operator) %>
+  </li>
+</ul>
+<% end %>
+  <div class="contenttitle radiusbottom0">
+    <h2 class="editor"><span>Display Profile</span></h2>
+  </div>
+  <table cellspacing="0" cellpadding="0" border="0" class="stdtable">
+    <colgroup>
+        <col class="con0">
+        <col class="con1">
+    </colgroup>
+    <tbody>
+        <tr>
+            <td> 
+<%=  form_for([:admin, @operator],:html => { :class => "stdform update_operator", :multipart => true }) do |f| %>
+  <div class="display">
+    <table cellspacing="0" cellpadding="0" border="0" class="stdtable">
+      <tbody>
+        <tr>
+          <td  width="600px"> 
+            <div class="control-group">
+              <%= f.label :display_name, :class => "control-label" %>
+              <div class="controls">
+                <%= f.text_field :display_name, :autofocus => true %> 
+              </div>  	
+            </div>	
+            <div class="control-group">
+              <%= f.label :short_bio, :class => "control-label" %>
+              <div class="controls">
+                <%= f.text_field :short_bio  %> 
+              </div>  	
+            </div>	
+            <div class="control-group">
+              <%= f.label :long_bio, :class => "control-label" %>
+              <div class="controls">
+                <%= f.text_area :long_bio, :rows=>3  %> 
+              </div>  	
+            </div>	
+            <div class="control-group">
+              <label for="operator_skills" class="control-label">Add new skill</label>
+              <div class="controls">
+                <input type="text" autocomplete="off"  class="skill_input focus" maxlength="20" placeholder="Skills">
+              </div>  	
+            </div>	
+            <div class="control-group">
+              <label for="operator_skills" class="control-label">Skills</label>
+              <div class="controls skillfield">
+                <ul>
+                  <% 
+                    skills = @operator.skills
+                    skills.each do |skill| %>
+                      <li><span class="title"><%=  skill.name %></span><span  class="remove"></span><input type="hidden" name="skills[]" value="<%=  skill.name %>"></li>
+                  <% end %>
+                </ul>
+              </div>  	
+            </div>	
+            <div class="control-group">
+              <label for="operator_languages" class="control-label">Add new Language</label>
+              <div class="controls">
+                <input type="text" autocomplete="off"  class="language_input focus" maxlength="20" placeholder="Languages">
+              </div>  	
+            </div>	
+            <div class="control-group">
+              <label for="operator_languages" class="control-label">Languages</label>
+              <div class="controls languagefield">
+                <ul>
+                  <% 
+                    languages = @operator.languages
+                    languages.each do |language| %>
+                    <li><span class="title"><%=  language %></span><span  class="remove"></span><input type="hidden" name="languages[]" value="<%=  language %>"></li>
+                  <% end unless languages.nil?  %>
+                </ul>
+              </div>  	
+            </div>	
+          </td>
+          <td>
+            <div class="control-group">
+              <%= f.label :display_avatar, :class => "control-label" %>
+              <div class="controls">
+                <%= f.file_field :display_avatar, :autofocus => true %> 
+              </div>  	
+            </div>	
+          </td>
+        </tr>
+      </tbody>
+    </table>    
+    <input name="template_action" value="profile" type="hidden">
+  </div>	 
+  <div class="clear"></div>
+	<div class="control-group"> 
+    <div class="controls">
+    	<%= f.submit :class => "submit btn-primary" %> 
+    </div>  	
+  </div>	
+<%  end %>
+          </td>
+          </tr>
+      </tbody>
+    </table>    
+<script>
+  //<![CDATA[
+    $(function() {
+      var skills = [<% 
+        @skills.each do |skill| %>
+          "<%=  skill.name %>",
+        <%  end %>];
+      var availableTags = [
+        "English",
+        "Italian",
+        "Spanish",
+        "French",
+        "German"
+      ];
+      $( ".skill_input" ).autocomplete({
+        source: skills
+      });
+      $( ".language_input" ).autocomplete({
+        source: availableTags
+      });
+      $( ".skill_input" ).bind( "autocompleteclose", function(event, ui) {
+        var skill_name = $(this).val();
+        if ( $.inArray(skill_name, skills) < 0) return;
+        if(skill_name=='')return;
+        var html = '<li><span class="title">'+skill_name+'</span><span  class="remove"></span><input type="hidden" name="skills[]" value="'+skill_name+'"></li>';
+        $(this).val('');
+        if($('.skillfield ul li:contains('+skill_name+')').size()>0)return;
+        $('.skillfield ul').append(html);
+        $(".update_operator ul li span.remove").on('click',function(){
+          $(this).parent().remove();
+        });
+      });
+      $( ".language_input" ).bind( "autocompleteclose", function(event, ui) {
+        var lang_name = $(this).val();
+        if(lang_name=='')return;
+        var html = '<li><span class="title">'+lang_name+'</span><span  class="remove"></span><input type="hidden" name="languages[]" value="'+lang_name+'"></li>';
+        $(this).val('');
+        if($('.languagefield ul li:contains('+lang_name+')').size()>0)return;
+        $('.languagefield ul').append(html);
+        $(".update_operator ul li span.remove").on('click',function(){
+          $(this).parent().remove();
+        });
+      });
+      $(".update_operator ul li span.remove").on('click',function(){
+       	$(this).parent().remove();
+      });
+    });
+  //]]>
+</script>

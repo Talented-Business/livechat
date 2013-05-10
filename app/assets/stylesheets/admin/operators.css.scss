@@ -1,0 +1,76 @@
+// Place all the styles related to the admin/operators controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+.stdtable {
+  border-top: 1px solid #DDDDDD;
+}
+.update_operator{
+  .skillfield, .languagefield{
+    background: none repeat scroll 0 0 #FCFCFC;
+    border: 1px solid #CCCCCC;
+    border-radius: 2px 2px 2px 2px;
+    box-shadow: 1px 1px 2px #DDDDDD inset;
+    color: #666666;
+    padding: 8px 5px;
+    display: inline-block;
+    height: 70px;
+    width:300px;
+    margin-bottom: -3px;
+    overflow: hidden;
+    transition: height 0.2s ease-in-out 0s;
+    ul{
+      list-style: none;
+      li{
+        float: left;
+        margin: 5px;
+        .title {
+          float: left;
+          background-color: #6c6c6c;
+          height: 26px;
+          line-height: 26px;
+          color: white;
+          padding: 0 5px;
+          font-family: Verdana;
+          font-size: 12px;
+        }
+        .remove{
+          float: left;
+          background: url(/assets/btn_selected_lang_remove.png?a) no-repeat;
+          width: 28px;
+          height: 26px;
+          cursor:pointer;
+        }
+      }
+    }
+    input.skill_input, input.language_input{
+      display: inline-block;
+      background: none repeat scroll 0 0 transparent;
+      border: medium none;
+      box-shadow: none;
+      color: #252523;
+      font-size: 12px;
+      height: 20px;
+      outline: medium none;
+      padding: 1px;
+      width: 100px;
+    }
+  }
+}
+.form-filter{
+  margin:auto;
+  width:700px;
+  padding: 10px;
+  .filter{
+    width:100px;
+    min-width:100px;
+  }
+  span{
+    padding:0 15px;
+    font-weight:bold;
+  }
+}
+#session_history{
+  tr{
+    cursor: pointer;
+  }
+}

@@ -1,0 +1,111 @@
+<%=  form_for([:admin, @operator],:html => { :class => "stdform update_operator", :multipart => true }) do |f| %>
+  <div class="real">
+    <div class="contenttitle radiusbottom0">
+      <h2 class="editor"><span>Real Identification</span></h2>
+    </div>
+    <table cellspacing="0" cellpadding="0" border="0" class="stdtable">
+      <tbody>
+        <tr>
+          <td> 
+            <div class="control-group">
+              <%= f.label :name, :class => "control-label" %>
+              <div class="controls">
+                <%= f.text_field :name, :autofocus => true %> 
+              </div>  	
+            </div>	
+            <div class="control-group">
+              <%= f.label :real_name, :class => "control-label" %>
+              <div class="controls">
+                <%= f.text_field :real_name, :autofocus => true %> 
+              </div>  	
+            </div>	
+            <div class="control-group">
+              <%= f.label :password, :class => "control-label" %>
+              <div class="controls">
+                <%= f.password_field :password, :autofocus => true %> 
+              </div>  	
+            </div>	
+            <div class="control-group">
+              <%= f.label :password_confirm, :class => "control-label" %>
+              <div class="controls">
+                <%= f.password_field :password_confirmation, :autofocus => true %> 
+              </div>  	
+            </div>	
+            <div class="control-group">
+              <%= f.label "Contact Number", :class => "control-label" %>
+              <div class="controls">
+                <%= f.text_field :mobile_number, :autofocus => true %> 
+              </div>  	
+            </div>	
+            <div class="control-group">
+              <%= f.label :email, :class => "control-label" %>
+              <div class="controls">
+                <%= f.text_field :email, :autofocus => true %> 
+              </div>  	
+            </div>	
+            <div class="control-group">
+              <%= f.label :country, :class => "control-label" %>
+              <div class="controls">
+                <%= country_select("operator","country",[ "United Kingdom", "France", "Germany" ]) %> 
+              </div>  	
+            </div>	
+          </td>
+          <td> 
+            <div class="control-group">
+              <%= f.label :avatar, :class => "control-label" %>
+              <div class="controls">
+                <%= f.file_field :name, :autofocus => true %> 
+              </div>  	
+            </div>	
+          </td>
+        </tr>
+      </tbody>
+    </table>    
+  </div>	  
+  <div class="clear"></div>
+  <div class="display">
+    <div class="contenttitle radiusbottom0">
+      <h2 class="editor"><span>Display Profile</span></h2>
+    </div>
+    <table cellspacing="0" cellpadding="0" border="0" class="stdtable">
+      <tbody>
+        <tr>
+          <td> 
+            <div class="control-group">
+              <%= f.label :display_name, :class => "control-label" %>
+              <div class="controls">
+                <%= f.text_field :display_name, :autofocus => true %> 
+              </div>  	
+            </div>	
+            <div class="control-group">
+              <%= f.label :short_bio, :class => "control-label" %>
+              <div class="controls">
+                <%= f.text_field :short_bio  %> 
+              </div>  	
+            </div>	
+            <div class="control-group">
+              <%= f.label :long_bio, :class => "control-label" %>
+              <div class="controls">
+                <%= f.text_field :long_bio  %> 
+              </div>  	
+            </div>	
+          </td>
+          <td>
+            <div class="control-group">
+              <%= f.label :display_avatar, :class => "control-label" %>
+              <div class="controls">
+                <%= f.file_field :display_avatar, :autofocus => true %> 
+              </div>  	
+            </div>	
+          </td>
+        </tr>
+      </tbody>
+    </table>    
+  </div>	 
+  <div class="clear"></div>
+	<div class="control-group"> 
+    <div class="controls">
+    	<%= f.submit :class => "submit btn-primary" %> 
+    </div>  	
+  </div>	
+<%  end %>

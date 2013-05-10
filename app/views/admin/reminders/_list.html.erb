@@ -1,0 +1,12 @@
+<% @reminders.each do | reminder |  %>
+  <tr>
+    <td><%=  (@reminders.index(reminder)+1).to_s %></td>
+    <td><%= reminder.name %></td>
+    <td><%= reminder.inactivity %></td>
+    <td><%= reminder.setted_time %></td>
+    <td><%= reminder.spread %> minutes</td>
+    <td><%= reminder.not_users %></td>
+    <td><%= reminder_message(reminder.message) %></td>
+    <td><%= link_to "Edit",edit_admin_reminder_path(reminder),:remote=>true %> & <%= link_to "Delete",[:admin,reminder],:remote=>true,:method => :delete, :confirm => "Are you sure ?" %></td>
+  </tr>
+<% end %>  

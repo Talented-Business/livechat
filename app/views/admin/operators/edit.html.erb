@@ -1,0 +1,108 @@
+<% content_for :menu do %>
+  <ul class="maintabmenu multipletabmenu">
+    <li class="current">
+      <%= link_to "Real Identification", edit_admin_operator_path(@operator) %>
+    </li>
+    <li>
+      <%= link_to "Session History", session_history_admin_operator_path(@operator) %>
+    </li>
+    <li>
+      <%= link_to "Attendance History", attendance_history_admin_operator_path(@operator) %>
+    </li>
+    <li>
+      <%= link_to "Display Profile", profile_admin_operator_path(@operator) %>
+    </li>
+  </ul>
+<% end %>
+  <div class="contenttitle radiusbottom0">
+    <h2 class="editor"><span>Real Identification</span></h2>
+  </div>
+  <table cellspacing="0" cellpadding="0" border="0" class="stdtable">
+    <colgroup>
+        <col class="con0">
+        <col class="con1">
+        <col class="con0">
+        <col class="con1">
+        <col class="con0">
+    </colgroup>
+    <tbody>
+        <tr>
+            <td> 
+<%=  form_for([:admin, @operator],:html => { :class => "stdform update_operator", :multipart => true }) do |f| %>
+  <div class="real">
+    <table cellspacing="0" cellpadding="0" border="0" class="stdtable">
+      <tbody>
+        <tr>
+          <td> 
+            <div class="control-group">
+              <%= f.label :name, :class => "control-label" %>
+              <div class="controls">
+                <%= f.text_field :name, :autofocus => true %> 
+              </div>  	
+            </div>	
+            <div class="control-group">
+              <%= f.label :real_name, :class => "control-label" %>
+              <div class="controls">
+                <%= f.text_field :real_name, :autofocus => true %> 
+              </div>  	
+            </div>	
+            <div class="control-group">
+              <%= f.label :password, :class => "control-label" %>
+              <div class="controls">
+                <%= f.password_field :password, :autofocus => true %> 
+              </div>  	
+            </div>	
+            <div class="control-group">
+              <%= f.label :password_confirm, :class => "control-label" %>
+              <div class="controls">
+                <%= f.password_field :password_confirmation, :autofocus => true %> 
+              </div>  	
+            </div>	
+            <div class="control-group">
+              <%= f.label "Contact Number", :class => "control-label" %>
+              <div class="controls">
+                <%= f.text_field :mobile_number, :autofocus => true %> 
+              </div>  	
+            </div>	
+            <div class="control-group">
+              <%= f.label :email, :class => "control-label" %>
+              <div class="controls">
+                <%= f.text_field :email, :autofocus => true %> 
+              </div>  	
+            </div>	
+            <div class="control-group">
+              <%= f.label :country, :class => "control-label" %>
+              <div class="controls">
+                <%= country_select("operator","country",[ "United Kingdom", "France", "Germany" ]) %> 
+              </div>  	
+            </div>	
+          </td>
+          <td> 
+            <div class="control-group">
+              <%= f.label :avatar, :class => "control-label" %>
+              <div class="controls">
+                <%= f.file_field :avatar, :autofocus => true %> 
+              </div>  	
+            </div>	
+          </td>
+        </tr>
+      </tbody>
+    </table>  
+    <input name="template_action" value="edit" type="hidden">
+  </div>	  
+  <div class="clear"></div>
+	<div class="control-group"> 
+    <div class="controls">
+    	<%= f.submit :class => "submit btn-primary" %> 
+    </div>  	
+  </div>	
+<%  end %>
+                
+          </td>
+
+          </tr>
+
+
+      </tbody>
+    </table>    
+

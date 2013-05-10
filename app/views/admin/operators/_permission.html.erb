@@ -1,0 +1,112 @@
+<div class="contenttitle">
+  <h2 class="form"><span>Permission of <%= @operator.name %></span></h2>
+</div>
+<table cellspacing="0" cellpadding="0" border="0" class="stdtable">
+  <colgroup>
+    <col class="con0">
+    <col class="con1">
+  </colgroup>
+  <tbody>
+    <tr>
+      <td class="con0" >      
+        <%= form_for [:admin,@permission], :html=>{:class => "stdform operator_permission"}, :remote=>true  do |f|%>
+          <%= f.hidden_field :operator_id %>
+          <% if @operator.has_role? :admin %>
+            <p>
+              <span class="fieldcheckbox">
+                <%= f.check_box :editable_profile_admin %>
+              </span>
+              <span>Can edit identity profile(real details)</span>
+            </p>
+            <p>
+              <span class="fieldcheckbox">
+                <%= f.check_box :character_profile_admin %>
+              </span>
+              <span>Can edit character profile</span>
+            </p>
+            <p>
+              <span class="fieldcheckbox">
+                <%= f.check_box :mass_sending_admin %>
+              </span>
+              <span>Can add and edit content for mass sending</span>
+            </p>
+            <p>
+              <span class="fieldcheckbox">
+                <%= f.check_box :kickop_admin %>
+              </span>
+              <span>Can kick op from workpage</span>
+            </p>
+            <p>
+              <span class="fieldcheckbox">
+                <%= f.check_box :editable_note_admin %>
+              </span>
+              <span>Can view and edit notes</span>
+            </p>
+          <% else %>
+            <p>
+              <span class="fieldcheckbox">
+                <%= f.check_box :outside_shift %>
+              </span>
+              <span>Can access work page outside of shifts</span>
+            </p>
+            <p>
+              <span class="fieldcheckbox">
+                <%= f.check_box :notes %>
+              </span>
+              <span>Can view notes</span>
+            </p>
+            <p>
+              <label class="permission" style="width:165px;">Idle time before kicked</label>
+              <span class="field">
+                <%=  f.select :idle_time, options_for_select([["10 minutes",10], ["20 minutes",20], ["40 minutes",40]],@permission.idle_time.to_i)  %>
+              </span>
+            </p>
+            <p>
+              <span class="fieldcheckbox">
+                <%= f.check_box :schedule %>
+              </span>
+              <span>Can acess schedule</span>
+            </p>
+            <p>
+              <label class="permission">between</label>
+              <span class="field" style="display:inline;">
+                <%= f.text_field :start_date,:class=>"datestart date-pick", :style=>"width:77px;", :value=>@permission.start_date.strftime("%m/%d/%Y") unless @permission.start_date.nil? %>
+              </span>
+              <label style="float:none;">and</label>
+              <span class="field" style="display:inline;">
+                <%= f.text_field :end_date,:class=>"dateend date-pick", :style=>"width:77px;", :value=>@permission.end_date.strftime("%m/%d/%Y") unless @permission.end_date.nil?%>
+              </span>
+            </p>
+          <% end %>
+          <p class="stdformbutton">
+            <button class="submit radius2">Save</button>
+          </p>
+        <% end %> 
+      </td>
+    </tr>
+  </tbody>
+</table>
+<script>
+$(".operator_permission").submit(function(){
+  start_date = new Date($("#permission_start_date").val())
+  end_date = new Date($("#permission_end_date").val())
+  if(start_date > end_date){
+    $("#permission_start_date").addClass("error");
+    $("#permission_end_date").addClass("error");
+    $("#permission_start_date").parents("p").append('<label class="error">can\'t be earlier then start date time.</label>')
+    return false
+  }
+  return true;
+});
+
+$("#permission_start_date").change(function(){
+  $("#permission_start_date").parents("p").find("label.error").remove();
+  $(this).removeClass("error");
+  $("#permission_end_date").removeClass("error");    
+})
+$("#permission_end_date").change(function(){
+  $("#permission_start_date").parents("p").find("label.error").remove();
+  $(this).removeClass("error");
+  $("#permission_start_date").removeClass("error");    
+})  
+</script>

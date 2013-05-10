@@ -1,0 +1,78 @@
+<%=  form_for([:admin,@user],:html => { :class => "stdform update_user", :multipart => true }) do |f| %>
+  <div class="details">
+    <div class="control-group">
+      <%= f.label :name, :class => "control-label" %>
+      <div class="controls">
+        <%= f.text_field :name, :autofocus => true %> 
+      </div>  	
+    </div>	
+    <div class="control-group">
+      <%= f.label :display_name, :class => "control-label" %>
+      <div class="controls">
+        <%= f.text_field :display_name, :autofocus => true %> 
+      </div>  	
+    </div>	
+    <div class="control-group">
+      <%= f.label :real_name, :class => "control-label" %>
+      <div class="controls">
+        <%= f.text_field :real_name, :autofocus => true %> 
+      </div>  	
+    </div>	
+    <div class="control-group">
+      <%= f.label :email, :class => "control-label" %>
+      <div class="controls">
+        <%= f.text_field :email, :autofocus => true %> 
+      </div>  	
+    </div>	
+    <div class="control-group">
+      <%= f.label :mobile_number, :class => "control-label" %>
+      <div class="controls">
+        <%= f.text_field :mobile_number, :autofocus => true %> 
+      </div>  	
+    </div>	
+    <div class="control-group">
+      <%= f.label :status, :class => "control-label" %>
+      <div class="controls">
+        <%= f.select :status,[['General', 'general'], ['VIP', 'vip'], ['IMPORTANT', 'important']] %> 
+      </div>  	
+    </div>	
+  </div>	  
+  <div class="content">
+    <div class="control-group">
+      <%= f.label :avatar, :class => "control-label" %>
+      <div class="controls">
+        <%= f.file_field :avatar, :autofocus => true %> 
+      </div>  	
+    </div>	
+    <div class="control-group">
+      <%= f.label :credits, :class => "control-label" %>
+      <div class="controls">
+        <%= f.text_field :credits,:rows =>10  %> 
+      </div>  	
+    </div>	
+    <div class="control-group">
+      <%= f.label :credits, :class => "control-label" %>
+      <div class="controls">
+        <%= f.text_field :credits,:rows =>10  %> 
+      </div>  	
+    </div>	
+    <div class="control-group">
+      <%= f.label :sales, :class => "control-label" %>
+      <div class="controls">
+        <%= f.text_field :sales, :autofocus => true %> 
+      </div>  	
+    </div>	
+    <div class="control-group">
+      <%= f.label :bonus_credits, :class => "control-label" %>
+      <div class="controls">
+        <%= f.text_field :bonus_credits, :autofocus => true %> 
+      </div>  	
+    </div>	
+  </div>	 
+  <div class="clear"></div>
+	<div class="control-group"> 
+    <div class="controls">
+    	<%= f.submit :class => "submit btn-primary" %> 
+    </div>  	
+  </div>	
+<%  end %>

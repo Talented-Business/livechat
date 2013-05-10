@@ -1,0 +1,5 @@
+<% @notes.each do |note| %>
+<p>
+  <span class="radius2"><%= note.operator.real_name %>  <%= note.created_at.to_s %></span> 
+  <br><%= note.note %></p>
+<% end %>

@@ -1,0 +1,89 @@
+<% content_for :menu do %>
+  <ul class='maintabmenu'>
+    <li><%= link_to "Overview", admin_systemmetas_path %></li>
+    <li><%= link_to "Permissions", permission_admin_systemmetas_path %></li>
+    <li class='current'><a href='javascript:void(0)'>Marketing</a></li>
+  </ul>
+<% end %>
+<div class="contenttitle">
+  <h2 class="form"><span>Message of Day</span></h2>
+</div>
+<%= form_tag(marketing_admin_systemmetas_path, :method => :post,:class => "stdform market_setting",:remote => true) do %>
+  <table cellspacing="0" cellpadding="0" border="0" class="stdtable">
+    <colgroup>
+      <col class="con0">
+      <col class="con1">
+    </colgroup>
+    <thead>
+      <tr>
+        <th class="head0">For operators</th>
+        <th class="head1">For users</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="con0">
+          <p>
+            <span class="field"><textarea name="settings[operator_daily_message]" class="longinput" rows="5" cols="80"><%= get_setting('operator_daily_message') %></textarea></span> 
+          </p>          
+        </td>
+        <td class="con1">
+          <p>
+            <span class="field"><textarea name="settings[user_daily_message]" class="longinput" rows="5" cols="80"><%= get_setting('user_daily_message') %></textarea></span> 
+          </p>          
+        </td>
+      </tr>
+      <tr>
+        <td class="con0" colspan="2">
+          <p style="margin-left: 40%;">
+            <button class="submit radius2">Save</button>
+          </p>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+<% end %>  
+<div class="contenttitle">
+  <h2 class="form"><span>Reminder list</span></h2>
+</div>
+<div class="actionBar">
+  <%= link_to "Add new Reminder",new_admin_reminder_path, :remote =>true %>
+</div>
+<div id="modal-reminder">
+</div>
+<table cellspacing="0" cellpadding="0" border="0" class="stdtable">
+  <colgroup>
+    <col class="con0">
+    <col class="con1">
+    <col class="con0">
+    <col class="con1">
+    <col class="con0">
+  </colgroup>
+  <thead>
+    <tr>
+      <th class="head0">No</th>
+      <th class="head1">Name</th>
+      <th class="head0">Inactivity</th>
+      <th class="head1">Time sent</th>
+      <th class="head0">Spread</th>
+      <th class="head0">No of Users</th>
+      <th class="head1">Message</th>
+      <th class="head0">Action</th>
+    </tr>
+  </thead>
+  <tfoot>
+    <tr>
+      <th class="head0">No</th>
+      <th class="head1">Name</th>
+      <th class="head0">Inactivity</th>
+      <th class="head1">Time sent</th>
+      <th class="head0">Spread</th>
+      <th class="head0">No of Users</th>
+      <th class="head1">Message</th>
+      <th class="head0">Action</th>
+    </tr>
+  </tfoot>
+  <tbody id="reminder_list">
+    <%= render :partial=>"admin/reminders/list" %>
+  </tbody>
+</table>

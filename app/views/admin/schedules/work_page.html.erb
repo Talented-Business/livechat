@@ -1,0 +1,78 @@
+<% content_for :menu do %>
+  <ul class='maintabmenu'><li class='current'><a href='javascript:void(0)'>Workpage</a></li></ul>
+<% end %>
+<h3><%= current_hour = Time.now.strftime("%H").to_i%></h3>
+<h3><%=@working_status%></h3>
+<div class="workpage">  
+  <div id="userlist">
+    <div class="widgetbox">
+        <div class="title"><h2 class="chat"><span>User List</span></h2></div>
+        <div class="widgetcontent padding0 statement">
+          <table cellspacing="0" cellpadding="0" border="0" class="stdtable">
+            <thead>
+              <tr>
+                <th class="head0">User Name</th>
+                <th class="head1">Waiting time</th>
+              </tr>
+            </thead>
+            <tbody>
+              <%= render "admin/chat_messages/chatuserlist" %>
+            </tbody>
+          </table>
+
+      </div><!--widgetcontent-->
+    </div>
+  </div>
+  <div id="chat" class="chatcontent">
+    <div class="chatmessage" id="chatmessage">
+
+      <div id="chatmessageinner">
+        <%= render "admin/chat_messages/chatmessages" if session.has_key?(:chat_user_id)%>
+      </div><!--chatmessageinner-->
+
+    </div>
+    <div class="messagebox">
+      <%= form_for [:admin,@new_chat], :validate=>true, :html=>{:class=>"message-form"},:remote=>true do |f|%>
+        <%= f.text_area :message ,:rows=>3  %>
+        <button type="submit">Send</button>
+      <% end %>
+    </div>
+  </div>
+  <div id="oprator_infor" class="right">
+    <div class="widgetbox">
+      <div class="title"><h2 class="tabbed"><span>Operator Information</span></h2></div>
+      <div class="widgetcontent announcement">
+        <p>Login Name: <%= current_operator.name%><br>
+        Real Name:<%= current_operator.real_name%><br>
+        Display Name:<%= current_operator.display_name%><br>
+        Message Sent:<%= 25%></p>
+      </div><!--widgetcontent-->
+    </div>
+  </div>
+  <div id="user_info" class="right">
+    <%= render "admin/chat_messages/userinfo" if session.has_key?(:chat_user_id)%>
+  </div>
+  <% if can? :read, Note %>
+    <div id="user_note" class="right stdform">
+      <div class="widgetbox">
+        <div class="title">
+          <h2 class="tabbed">
+            <span>Note</span>
+          </h2>
+        </div>
+        <div class="widgetcontent announcement">
+            <div class="note_history">
+              <%= render "note_history" if session.has_key?(:chat_user_id)%>
+            </div>
+          <% if can? :manage, Note %>
+            <%= form_tag note_admin_schedules_path, :class=>"note-form",:remote=>true do |f|%>
+              <textarea id="new_note" style="width:100%" name="note" rows="5" cols="80"></textarea>
+              <br>
+              <div style=" margin: 10px auto;width: 70px;"><button type="submit">Save</button></div>
+            <% end %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>

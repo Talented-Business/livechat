@@ -1,0 +1,35 @@
+<% content_for :menu do %>
+  <ul class='maintabmenu'><li class='current'><a href='javascript:void(0)'>New Message</a></li></ul>
+<% end %>
+<div class="contenttitle radiusbottom0">
+  <h2 class="editor"><span>New Message</span></h2>
+</div>
+<%= render "header" %>
+<div class="messages_left">
+  <%= render "left" %>
+</div>
+<div class="messages_content">
+  <%= form_for [:admin,@new_message],:html => { :class => "stdform"} do | f| %>
+    <div class="control-group">	
+      <%= f.label :recipient, "Send To", :class => "control-label" %>
+      <div class="controls">
+        <%= f.select :recipient,options_for_select(@senders) %>
+      </div>  	
+    </div>
+    <div class="control-group">	
+      <label for="subject" class = "control-label">Subject</label>
+      <div class="controls">
+        <%= f.text_field :topic, :autofocus => true%> 
+      </div>  	
+    </div>
+    <div class="control-group">	
+      <%= f.label :message, :class => "control-label" %>
+      <div class="controls">
+        <%= f.text_area :message, :autofocus => true,:rows=>5 %> 
+      </div>  	
+    </div>
+    <div class="span2">
+      <%= f.submit "Send", :class => "btn stdbtn btn-primary" %> 
+    </div>
+  <% end %>
+</div>

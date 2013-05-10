@@ -1,0 +1,40 @@
+<!DOCTYPE html xmlns:fb="http://ogp.me/ns/fb#>
+<html lang="en">
+<head>
+  <title><%= content_for?(:title) ? yield(:title) : "Dashboard" %> | Dashboard</title>
+  <%= stylesheet_link_tag    "application" %>
+  <%= javascript_include_tag "application" %>
+  <%= csrf_meta_tags %>
+</head>
+<body class="loggedin">
+    <%= render 'layouts/header' %>
+    <div class="mainwrapper">
+      <div class="mainwrapperinner">
+        <div class="mainleft">
+          <%= render 'admin/menubar' %>
+        </div>
+        <div class="maincontent noright">
+          <div class="mainwrapperinner">
+            <div class="maincontentinner">
+              <%= content_for?(:menu) ? yield(:menu).html_safe : "<ul class='maintabmenu'><li class='current'><a href='javascript:void(0)'>Dashboard</a></li></ul>".html_safe %>
+              <!--maintabmenu-->
+
+              <div class="content"> 
+                <% flash.each do |key, value| %>
+                  <div class="notification msg<%= key %>">
+                    <a class="close" data-dismiss="alert" href="#"></a>
+                    <p><%= value %></p>
+                  </div>
+                <% end %>
+                <%= yield %>
+                <!--content-->
+              </div>
+            </div>
+            <%= render 'admin/footer' %>
+          </div>
+        </div>
+      </div>
+    </div>
+  <%= debug(params) if Rails.env.development? %>
+</body>
+</html>

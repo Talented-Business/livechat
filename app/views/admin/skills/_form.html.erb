@@ -1,0 +1,19 @@
+<%=  form_for([:admin,@skill],:html => { :class => "stdform update_skill" }) do |f| %>
+  <div class="control-group">
+  	<%= f.label :name, :class => "control-label" %>
+    <div class="controls">
+    	<%= f.text_field :name, :autofocus => true %> 
+    </div>  	
+  </div>	
+  <div class="control-group">
+  	<%= f.label :description, :class => "control-label" %>
+    <div class="controls">
+    	<%= f.text_area :description,:rows =>10  %> 
+    </div>  	
+  </div>	
+	<div class="control-group"> 
+    <div class="controls">
+    	<%= f.submit :class => "submit btn-primary" %> 
+    </div>  	
+  </div>	
+<%  end %>

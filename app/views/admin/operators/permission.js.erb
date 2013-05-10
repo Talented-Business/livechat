@@ -1,0 +1,23 @@
+$("#operator_permission").html('<%=j render "permission" %>');
+$("input:checkbox").each(function() {
+  var t;
+  t = $(this);
+  t.wrap("<span class=\"checkbox\"></span>");
+  if ($(this).is(":checked")) {
+    t.prop("checked", true);
+    t.parent().addClass("checked");
+  } else {
+    t.prop("checked", false);
+    t.parent().removeClass("checked");
+  }
+  t.click(function(){
+    if(t.is(':checked')) {
+      t.prop("checked", true);
+      t.parent().addClass('checked');
+    } else {
+      t.prop("checked", false);
+      t.parent().removeClass('checked');
+    }
+  });  
+});
+$('.date-pick').datepicker();

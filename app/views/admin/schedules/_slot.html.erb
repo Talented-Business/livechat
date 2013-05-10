@@ -1,0 +1,12 @@
+<% 
+  s=""
+  if @current_count>0
+    s = "full_fill"
+    if @total_count.to_i > @current_count
+      s = "full_not"
+    end
+  end
+%>
+<td class="<%= s %>" id="td_<%=  (@week.to_s+"_"+@number.to_s) %>">
+  <span class="<%= s %>_span" ><%= link_to (@current_count.to_s+"/"+@total_count.to_s).html_safe, rota_slot_admin_schedules_path(@thedate,@number), :remote => true %>&nbsp;</span>
+</td>

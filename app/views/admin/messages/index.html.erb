@@ -1,0 +1,50 @@
+<% content_for :menu do %>
+  <ul class='maintabmenu'><li class='current'><a href='javascript:void(0)'>Internal Message</a></li></ul>
+<% end %>
+<div class="contenttitle radiusbottom0">
+  <h2 class="editor"><span>Messages Center</span></h2>
+</div>
+<%= render "header" %>
+<div class="messages_left">
+  <%= render "left" %>
+</div>
+<div class="messages_content">
+  <% if @topics.size == 0 %>
+    <div class="well empty-message">No Messages</div>
+  <% else %>
+    <table class="topic_list">
+      <colgroup>
+        <col>
+        <col>
+        <col>
+        <col>
+      </colgroup>
+      <tbody>
+        <% @topics.each do | m | %>
+          <tr>
+            <td>
+              <%= link_to image_tag(m.sender.avatar.url(:small,false), :class=>"media-object"), t_admin_messages_path(m) %>
+            </td>
+            <td>
+              <a href="<%= t_admin_messages_path(m)%>">
+                <div class="">
+                  <span title="<%= topic_name(m, current_operator) %>"><%= topic_name(m, current_operator) %></span>
+                  <span class="tCount">&nbsp;(<%= m.count %>)</span>
+                </div>
+                <time title="<%= m.last_message.created_at.strftime("%a,%b %d %Y at %l:%M%p") %>" datetime="<%= m.last_message.created_at %>"><%= m.last_message.created_at.strftime("%b %d") %></time>
+              </a>
+            </td>
+            <td>
+              <a href="<%= t_admin_messages_path(m)%>">
+                <%= m.subject %>
+              </a>
+              <div class="">
+                <%= m.last_message.message %>
+              </div>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>  
+  <% end %>	  
+</div>

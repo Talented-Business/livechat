@@ -1,0 +1,9 @@
+var elm = $('.message_list');
+<% if @saved %>
+	$("<div class=\"clearfix\"></div>").insertAfter($("<%= j (render 'message', :message => @new_msg) %>").hide().prependTo(elm).fadeIn('slow'));
+	$(".empty-message").remove();
+	$(".full_message_input").val("");
+	
+<% else %>
+	$("div.new_message").append('<div class="alert alert-error" style="font-size: 13px"><button type="button" class="close" data-dismiss="alert">×</button><strong>Oh snap!</strong> Your message is unable to post.</div>');
+<% end %>

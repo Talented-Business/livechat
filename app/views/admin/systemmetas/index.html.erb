@@ -1,0 +1,111 @@
+<% content_for :menu do %>
+  <ul class='maintabmenu'>
+    <li class='current'><a href='javascript:void(0)'>Overview</a></li>
+    <li><%= link_to "Permissions", permission_admin_systemmetas_path %></li>
+    <li><%= link_to "Marketing", market_admin_systemmetas_path %></li>
+  </ul>
+<% end %>
+<div class="contenttitle">
+  <h2 class="form"><span>Overview</span></h2>
+</div>
+<%=  form_for(updates_admin_systemmetas_path,:html => { :class => "stdform " }) do |f| %>
+  <p>
+    <label class="settings">Minimum Character Length</label>
+    <span class="field">
+      <input type="text" class="tinyinput" name="settings[min_length]" value="<%= get_setting('min_length') %>">
+    </span>
+  </p>
+  <p>
+    <label class="settings">Maximum Character Length</label>
+    <span class="field">
+      <input type="text" class="tinyinput" name="settings[max_length]" value="<%= get_setting('max_length')%>">
+    </span>
+  </p>
+  <p>
+    <label class="settings">User Waiting time to alert op</label>
+    <span class="field">
+      <input type="text" class="tinyinput" name="settings[waiting_time]" value="<%= get_setting('waiting_time')%>">
+    </span>
+  </p>
+  <p>
+    <label class="settings">Inactivity time before op is kicked from work page</label>
+    <span class="field">
+      <input type="text" class="tinyinput" name="settings[inactivity_time]" value="<%= get_setting('inactivity_time')%>">
+    </span>
+  </p>
+  <p>
+    <label class="settings">Minutes logging in – late</label>
+    <span class="field">
+      <input type="text" class="tinyinput" name="settings[late_setting]" value="<%= get_setting('late_setting')%>">
+    </span>
+  </p>
+  <p>
+    <label class="settings">Session end time</label>
+    <span class="field">
+      <input type="text" class="tinyinput" name="settings[session_end_time]" value="<%= get_setting('session_end_time')%>"> Minutes
+    </span>
+  </p>
+  <p>
+    <label class="settings">Maximum number of users an op can have at any one time</label>
+    <span class="field">
+      <input type="text" class="tinyinput" name="settings[max_users_per_request]" value="<%= get_setting('max_users_per_request')%>">
+    </span>
+  </p>
+  <p>
+    <label class="settings">Monetary values for payscale a b and c </label>
+    <span class="field">
+      <input type="text" class="tinyinput" name="settings[payscale_a]" value="<%= get_setting('payscale_a')%>">
+      <input type="text" class="tinyinput" name="settings[payscale_b]" value="<%= get_setting('payscale_b')%>">
+      <input type="text" class="tinyinput" name="settings[payscale_c]" value="<%= get_setting('payscale_c')%>">
+    </span>
+  </p>
+  <p>
+    <label class="settings">Rating bandings for payscale a b and c </label>
+    <span class="field">
+      <input type="text" class="tinput" name="settings[rating_banding_a_start]" value="<%= get_setting('rating_banding_a_start')%>">
+      <input type="text" class="tinput" name="settings[rating_banding_a_end]" value="<%= get_setting('rating_banding_a_end')%>">
+      <input type="text" class="tinput" name="settings[rating_banding_b_start]" value="<%= get_setting('rating_banding_b_start')%>">
+      <input type="text" class="tinput" name="settings[rating_banding_b_end]" value="<%= get_setting('rating_banding_b_end')%>">
+      <input type="text" class="tinput" name="settings[rating_banding_c_start]" value="<%= get_setting('rating_banding_c_start')%>">
+      <input type="text" class="tinput" name="settings[rating_banding_c_end]" value="<%= get_setting('rating_banding_c_end')%>">
+    </span>
+  </p>
+  <p>
+    <label class="settings">Rota opening times</label>
+    <span class="field">
+      <input type="text" class="tinyinput date-pick" name="settings[rota_start_date]" data-date-format="dd-mm-yyyy" value="<%= get_setting('rota_start_date')%>">
+      <input type="text" class="tinyinput date-pick" name="settings[rota_end_date]" data-date-format="dd-mm-yyyy" value="<%= get_setting('rota_end_date')%>">
+    </span>
+  </p>
+  <p>
+    <label class="settings">Time allowed for cancellation requests</label>
+    <span class="field">
+      <input type="text" class="tinyinput" name="settings[allow_cancel]" value="<%= get_setting('allow_cancel')%>">
+    </span>
+  </p>
+  <p>
+    <label class="settings">Target hours</label>
+    <span class="field">
+      <input type="text" class="tinyinput" name="settings[target_hours]" value="<%= get_setting('target_hours')%>">
+    </span>
+  </p>
+  <!--<p>
+    <label class="settings">Number of weeks below target hours in any given month</label>
+      <span class="field"><input type="text" class="tinyinput" name="input2"></span>
+  </p>-->
+  <p>
+    <label class="settings">number of days when Notes will be stored</label>
+    <span class="field">
+      <input type="text" class="tinyinput" name="settings[notes_stored]" value="<%= get_setting('notes_stored')%>">
+    </span>
+  </p>
+  <p>
+    <label class="settings">Free Credit Count</label>
+    <span class="field">
+      <input type="text" class="tinyinput" name="settings[free_credits]" value="<%= get_setting('free_credits')%>">
+    </span>
+  </p>
+  <p class="stdformbutton">
+    <button class="submit radius2">Submit Button</button>
+  </p>
+<%  end %>

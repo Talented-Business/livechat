@@ -1,0 +1,79 @@
+// Place all the styles related to the admin/systemmetas controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+.stdform{
+  label.settings {
+    text-align: left;
+    margin-left:50px;
+    width: 400px;
+  }
+  label.permission{
+  }
+}
+.fieldcheckbox{
+  display: inline;
+}
+.ui-tabs {
+    background: none repeat scroll 0 0 #FCFCFC;
+    border: 1px solid #CCCCCC;
+    border-radius: 3px 3px 3px 3px;
+    overflow: hidden;
+}
+.ui-tabs {
+    box-shadow: 1px 1px 2px #EEEEEE;
+}
+.ui-tabs-nav {
+    background: url("../thead.png") repeat-x scroll left top #EEEEEE;
+    list-style: none outside none;
+}
+.ui-tabs-nav {
+    border-radius: 3px 3px 0 0;
+    height: 47px;
+    position: relative;
+}
+.ui-tabs-nav li {
+    display: inline-block;
+    float: left;
+}
+.ui-tabs-nav li:first-child a {
+    border-radius: 3px 0 0 0;
+}
+.ui-tabs-nav li a {
+    background: url("../titlebg.png") repeat-x scroll left top #EEEEEE;
+    border-bottom: 1px solid #DDDDDD;
+    border-right: 1px solid #DDDDDD;
+    color: #666666;
+    display: block;
+    font-weight: bold;
+    padding: 10px 20px;
+}
+.ui-tabs-nav li a:hover {
+    background: none repeat scroll 0 0 #DDDDDD;
+    text-decoration: none;
+}
+.ui-tabs-nav li.ui-state-active a {
+    background: none repeat scroll 0 0 #FFFFFF;
+    border-bottom: 1px solid #FFFFFF;
+    color: #333333;
+}
+.ui-tabs-hide {
+    display: none;
+}
+.ui-tabs-panel {
+    background: none repeat scroll 0 0 #FFFFFF;
+    padding: 15px;
+}
+.ui-tabs-panel ul {
+    margin: 10px;
+}
+.ui-tabs-panel ul li {
+    padding-left: 10px;
+}
+.widgetbox .ui-tabs {
+    border: 0 none;
+}
+#modal-reminder{display:none;}
+.ui-widget-header a {
+    border: 1px solid #999999;
+    float: right;
+}

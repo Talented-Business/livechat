@@ -1,0 +1,177 @@
+<% content_for :menu do %>
+  <ul class='maintabmenu'>
+    <li><%= link_to "Overview", admin_systemmetas_path %></li>
+    <li class='current'><a href='javascript:void(0)'>Permissions</a></li>
+    <li><%= link_to "Marketing", market_admin_systemmetas_path %></li>
+  </ul>
+<% end %>
+<table style="width:100%;">
+  <tr>
+    <td width="50%">
+      <div id="tabs">
+        <ul>
+          <li><a href="#tabs-1">Operators</a></li>
+          <li><a href="#tabs-2">Admins</a></li>
+        </ul>
+        <div id="tabs-1" class="ui-tabs-panel ui-widget-content ui-corner-bottom">
+          <div class="contenttitle radiusbottom0">
+            <h2 class="table"><span>Operations List</span></h2>
+          </div>      
+          <table cellspacing="0" cellpadding="0" border="0" class="stdtable">
+            <colgroup>
+              <col class="con0">
+              <col class="con1">
+            </colgroup>
+            <thead>
+              <tr>
+                <th class="head0">Login Number</th>
+                <th class="head1">Op Name</th>
+              </tr>
+            </thead>
+            <tfoot>
+              <tr>
+                <th class="head0">Login Number</th>
+                <th class="head1">Op Name</th>
+              </tr>
+            </tfoot>
+            <tbody>
+              <% @operators.each do |op|  %>
+                <tr>
+                  <td><%= link_to op.name, permission_admin_operator_path(op), :remote=>true %>&nbsp;</td>
+                  <td><%= op.real_name%>&nbsp;</td>
+                </tr>
+              <% end %>
+              <tr>
+                <td class="con0">&nbsp;</td>
+                <td class="con1">&nbsp;</td>
+              </tr>
+              <tr>
+                <td class="con0">&nbsp;</td>
+                <td class="con1">&nbsp;</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div id="tabs-2" class="ui-tabs-panel ui-widget-content ui-corner-bottom ui-tabs-hide">
+          <div class="contenttitle radiusbottom0">
+            <h2 class="table"><span>Admins List</span></h2>
+          </div>      
+          <table cellspacing="0" cellpadding="0" border="0" class="stdtable">
+            <colgroup>
+              <col class="con0">
+              <col class="con1">
+            </colgroup>
+            <thead>
+              <tr>
+                <th class="head0">Login Number</th>
+                <th class="head1">Op Name</th>
+              </tr>
+            </thead>
+            <tfoot>
+              <tr>
+                <th class="head0">Login Number</th>
+                <th class="head1">Op Name</th>
+              </tr>
+            </tfoot>
+            <tbody>
+              <% @admins.each do |op|  %>
+                <tr>
+                  <td><%= link_to op.name, permission_admin_operator_path(op), :remote=>true %>&nbsp;</td>
+                  <td><%= op.real_name%>&nbsp;</td>
+                </tr>
+              <% end %>
+              <tr>
+                <td class="con0">&nbsp;</td>
+                <td class="con1">&nbsp;</td>
+              </tr>
+              <tr>
+                <td class="con0">&nbsp;</td>
+                <td class="con1">&nbsp;</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div id="operator_permission">
+        <%= render :partial=>"admin/operators/permission" %>
+      </div>
+    </td>
+    <td width="50%">
+      <div class="contenttitle">
+        <h2 class="form"><span>Default Operator Permisson</span></h2>
+      </div>
+      <%= form_tag(updates_admin_systemmetas_path, :method => :post,:class => "stdform permission_setting") do %>
+        <p>
+          <span class="fieldcheckbox">
+            <input type="checkbox" class="smallinput" name="settings[outsite_shift_op]" <%= "checked" if get_setting('outsite_shift_op') == "1" %> value="outsite_shift_op">
+          </span>
+          <span>Can access work page outside of shifts</span>
+        </p>
+        <p>
+          <span class="fieldcheckbox">
+            <input type="checkbox" class="smallinput" name="settings[notes_op]" <%= "checked" if get_setting('notes_op') == "1" %> value="notes_op">
+          </span>
+          <span>Can view notes</span>
+        </p>
+        <p>
+          <label class="permission" style="width:165px;">Idle time before kicked</label>
+          <span class="field">
+            <%= select_tag "settings[idle_time_op]", options_idle_times(get_setting('idle_time_op')) %>
+          </span>
+        </p>
+        <p>
+          <span class="fieldcheckbox">
+            <input type="checkbox" class="smallinput" name="settings[schedule_op]" <%= "checked" if get_setting('schedule_op') == "1" %> value="schedule_op">
+          </span>
+          <span>Can acess schedule</span>
+        </p>
+        <p>
+          <label class="permission">between</label>
+          <span class="field" style="display:inline;">
+            <input type="text" class="datestart date-pick"  style="width:77px;" name="settings[schedule_start_date_op]" value="<%= get_setting('schedule_start_date_op')%>">
+          </span>
+          <label style="float:none;">&nbsp;&nbsp;and</label>
+          <span class="field" style="display:inline;">
+            <input type="text" class="dateend date-pick" style="width:77px;"  name="settings[schedule_end_date_op]" value="<%= get_setting('schedule_end_date_op')%>">
+          </span>
+        </p>
+      <div class="contenttitle">
+        <h2 class="form"><span>Default Admin Permisson</span></h2>
+      </div>
+        <p>
+          <span class="fieldcheckbox">
+            <input type="checkbox" class="smallinput" name="settings[editable_profile_admin]" <%= "checked" if get_setting('editable_profile_admin') == "1" %> value="editable_profile_admin">
+          </span>
+          <span>Can edit identity profile(real details)</span>
+        </p>
+        <p>
+          <span class="fieldcheckbox">
+            <input type="checkbox" class="smallinput" name="settings[character_profile_admin]" <%=  "checked" if get_setting('character_profile_admin') == "1" %> value="character_profile_admin">
+          </span>
+          <span>Can edit character profile</span>
+        </p>
+        <p>
+          <span class="fieldcheckbox">
+            <input type="checkbox" class="smallinput" name="settings[mass_sending_admin]" <%= "checked" if get_setting('mass_sending_admin') == "1" %> value="mass_sending_admin">
+          </span>
+          <span>Can add and edit content for mass sending</span>
+        </p>
+        <p>
+          <span class="fieldcheckbox">
+            <input type="checkbox" class="smallinput" name="settings[kickop_admin]" <%= "checked" if get_setting('kickop_admin') == "1" %> value="kickop_admin">
+          </span>
+          <span>Can kick op from workpage</span>
+        </p>
+        <p>
+          <span class="fieldcheckbox">
+            <input type="checkbox" class="smallinput" name="settings[editable_note_admin]" <%= "checked" if get_setting('editable_note_admin') == "1" %> value="editable_note_admin">
+          </span>
+          <span>Can view and edit notes</span>
+        </p>
+        <p class="stdformbutton">
+          <button class="submit radius2">Save</button>
+        </p>
+      <% end %>
+    </td>
+  </tr>
+</table>

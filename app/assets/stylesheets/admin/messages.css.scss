@@ -1,0 +1,129 @@
+// Place all the styles related to the admin/message controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+.messages_left{
+  margin-top: 5px;
+  width:150px;
+  position:absolute;
+}
+.messages_content{
+  margin-left:180px;
+  min-height: 100px;
+  .message_box h1{
+    margin-left:20%;
+  }
+  .row-fluid{
+    padding:20px;
+    h2{
+      display: inline-block;
+      width: 80px;
+      vertical-align: middle; 
+    }
+    form{
+      display: inline-block;
+      vertical-align: middle; 
+      .span7{
+        display: inline-block;
+        width: 450px;
+      }
+      .span2{
+        display: inline-block;
+        vertical-align: top; 
+      }
+    }
+  }
+  .message_list{
+    border: 2px solid #E6E6E3;
+    border-radius: 5px 5px 5px 5px;
+    .message_box{
+      padding:18px;
+      border-bottom: 1px solid #B2B2B2;
+      .message-user-info{
+        display: inline-block;    
+        vertical-align: top;    
+        width: 100px;
+      }
+      .message-text{
+        display:inline-block; 
+        width:400px;
+      }
+    }
+  }
+}
+header.messages_header {
+  margin-top:20px;
+  .messages_content{
+    min-height: 40px;
+  }
+}
+#new_message{
+  label{
+    font-size:18px;
+  }
+}
+.activitylist {
+  list-style: none; border-top: 1px solid #eee;
+  a{
+    font-size:20px;
+  }
+}
+[type="search"] {
+  background: url("../icons/default/sprites.png") no-repeat scroll -190px -443px #FCFCFC!important;
+ padding-left: 28px!important;
+}
+.topic_list{
+  width:90%;
+  border-radius: 7px;
+  border:solid #EDEDEB 3px;
+  tbody {
+    tr:first-child {
+      td:first-child {
+          border-top-left-radius: 7px;
+      }
+      td {
+          border-top-width: 3px;
+      }
+      td:last-child {
+          border-top-right-radius: 7px;
+      } 
+    } 
+
+    td:first-child {
+        border-left-width: 3px;
+    }
+    td:last-child {
+      border-right-width: 3px;
+    }
+    tr:last-child {
+      td:first-child {
+          border-bottom-left-radius: 5px;
+      }
+      td {
+          border-bottom-width: 3px;
+      }
+    }  
+    td{
+      vertical-align:middle;
+      border-color:#EDEDEB;
+      a{
+        color:#666666;
+      }
+      .tCount{
+        color:#7C7C7A;
+      }
+      time{
+        color:	#252523;
+        font-size:11px;
+      }
+    }
+  }
+  col:first-child {
+    width: 8%;
+  }
+  col:first-child + col {
+    width: 22%;
+  }
+  col:first-child + col + col {
+    width: 65%;
+  }
+}

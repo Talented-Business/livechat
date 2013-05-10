@@ -1,0 +1,19 @@
+<span class="booked_span" title="Cancel" >booked
+  <% 
+    unless defined? schedule 
+      schedule = @schedule
+      id = @element_id
+    end
+    nowtime = schedule.thedate.to_datetime.advance(:hours =>schedule.number)
+    allow_cancel = DateTime.now.advance(:hours =>@allow_cancel.to_i)
+    if nowtime > allow_cancel
+  %>
+      <%= form_for [:admin, schedule], :remote=>true, :method=>'delete' do |f| %>
+        <input type="hidden" name="element_id" value="<%= id %>" />
+        <%= f.hidden_field :id %>
+        <%= f.hidden_field :thedate %>
+        <%= f.hidden_field :number %>
+        <%= f.hidden_field :operator_id %>
+      <% end %>
+  <% end %>
+</span>    

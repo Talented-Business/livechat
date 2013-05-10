@@ -1,0 +1,64 @@
+<% content_for :menu do %>
+  <ul class="maintabmenu multipletabmenu">
+    <li>
+      <%= link_to "Real Identification", edit_admin_operator_path(@operator) %>
+    </li>
+    <li>
+      <%= link_to "Session History", session_history_admin_operator_path(@operator) %>
+    </li>
+    <li>
+      <%= link_to "Attendance History", attendance_history_admin_operator_path(@operator) %>
+    </li>
+    <li>
+      <%= link_to "Display Profile", profile_admin_operator_path(@operator) %>
+    </li>
+  </ul>
+<% end %>
+<div class="contenttitle">
+  <h2 class="form"><span>Message History</span></h2>
+</div>
+<table cellspacing="0" cellpadding="0" border="0" class="stdtable">
+  <colgroup>
+    <col class="con0">
+    <col class="con1">
+    <col class="con0">
+    <col class="con1">
+    <col class="con0">
+  </colgroup>
+  <thead>
+    <tr>
+      <th class="head0">Date</th>
+      <th class="head1">Sender</th>
+      <th class="head0">To</th>
+      <th class="head1">Message</th>
+      <th class="head1">Picture</th>
+    </tr>
+  </thead>
+  <tfoot>
+    <tr>
+      <th class="head0">Date</th>
+      <th class="head1">Sender</th>
+      <th class="head0">To</th>
+      <th class="head1">Message</th>
+      <th class="head1">Picture</th>
+    </tr>
+  </tfoot>
+  <tbody>
+    <tr>
+      <td>20 Feb 2013 02:55:09</td>
+      <td>Qing Han</td>
+      <td>User 1</td>
+      <td>Message content</td>
+      <td>Picture URL</td>
+    </tr>
+    <% (1..10).each do  %>
+      <tr>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

@@ -1,0 +1,54 @@
+<% content_for :menu do %>
+  <ul class='maintabmenu'><li class='current'><a href='javascript:void(0)'>Operators</a></li></ul>
+<% end %>
+    <div class="contenttitle radiusbottom0">
+      <h2 class="editor"><span>Operators</span></h2>
+    </div>
+    <div class="actionBar">
+      <%= link_to "Add new operator",new_admin_operator_path %>
+    </div>
+    <!--contenttitle-->
+    <table class="stdtable" border="0" cellpadding="0" cellspacing="0">
+      <colgroup>
+        <col class="con0">
+        <col class="con1">
+        <col class="con0">
+        <col class="con1">
+        <col class="con0">
+      </colgroup>
+      <thead>
+        <tr>
+          <th class="head0">&nbsp;</th>
+          <th class="head0" width="20%">Operator Name</th>
+          <th class="head1" width="20%">Display Name</th>
+          <th class="head0" width="23%">Email Address</th>
+          <th class="head1" width="15%">Sign Up date</th>
+          <th class="head0" width="15%">Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% if @operators.count >0 %>
+          <% @operators.each do |operator| %>
+            <tr>
+              <td><%= image_tag operator.avatar.url(:small) %></td>
+              <td><%= operator.name %></td>
+              <td><%= operator.display_name %>&nbsp;</td>
+              <td class="center"><%= operator.email %>&nbsp;</td>
+              <td>&nbsp;</td>
+              <td><%= link_to "Edit",edit_admin_operator_path(operator) %> &
+                  <% if operator.block %>
+                    <%= link_to "Unblock", unblock_admin_operator_path(operator) %>&
+                  <% else %>
+                    <%= link_to "Block", block_admin_operator_path(operator) %>&
+                  <% end %>
+                    <%= link_to "Delete", delete_admin_operator_path(operator) %></td>
+            </tr>
+          <% end %>
+        <% else %>
+          <tr>
+            <td colspan="6"> No Operators</td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table><br>
+  

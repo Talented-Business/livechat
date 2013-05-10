@@ -1,0 +1,13 @@
+$('#<%=@element_id%>').html("<%=escape_javascript(render :partial=>'cancel', :schedule=>@schedule,:title=>@title, :name=>@name)%>").removeClass("bookable").addClass("booked");
+$('#<%=@element_id%>').find(".booked_span").click(function(){
+  $(this).find("form").submit();
+});
+$('#<%=@element_id%>').find(".booked_span").mouseover(function(){
+  $(".goto_workpage").show();
+  s = $(this).position();
+  $(".goto_workpage").css("top",s.top+20);
+  $(".goto_workpage").css("left",s.left);    
+});
+$('#<%=@element_id%>').find(".booked_span").parents("td").mouseleave(function(){
+  $(".goto_workpage").hide();
+});  

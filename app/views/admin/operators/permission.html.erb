@@ -1,0 +1,47 @@
+<% content_for :menu do %>
+  <ul class="maintabmenu multipletabmenu">
+    <li>
+      <%= link_to "Real Identification", edit_admin_operator_path(@operator) %>
+    </li>
+    <li>
+      <%= link_to "Session History", session_history_admin_operator_path(@operator) %>
+    </li>
+    <li>
+      <%= link_to "Attendance History", attendance_history_admin_operator_path(@operator) %>
+    </li>
+    <li>
+      <%= link_to "Display Profile", profile_admin_operator_path(@operator) %>
+    </li>
+  </ul>
+<% end %>
+<div class="contenttitle">
+  <h2 class="form"><span>Permissions</span></h2>
+</div>
+<%= form_tag(updates_admin_systemmetas_path, :method => :post) %>
+  <p>
+    <span class="fieldcheckbox"><span class="checkbox"><span class="checkbox"><input type="checkbox" name="input1" class="smallinput"></span></span></span>
+    <span>Can access work page outside of shifts</span>
+  </p>
+  <p>
+    <span class="fieldcheckbox"><span class="checkbox"><span class="checkbox"><input type="checkbox" name="input1" class="smallinput"></span></span></span>
+    <span>Can view notes</span>
+  </p>
+  <p>
+    <span class="fieldcheckbox"><span class="checkbox"><span class="checkbox"><input type="checkbox" name="input1" class="smallinput"></span></span></span>
+    <span>Can answer users out of order</span>
+  </p>
+  <p>
+    <label style="width:165px;text-align: left;" class="permission">Idle time before kicked</label>
+    <span class="field"><input type="text" name="input2" style="width:50px;"></span>
+  </p>
+  <p>
+    <label style="width:210px;text-align: left;" class="permission">Can acess schedule between</label>
+    <span style="display:inline;" class="field"><input type="text" name="input3" style="width:65px;" class="datestart"></span>
+    <label style="float:none;">and</label>
+    <span style="display:inline;" class="field"><input type="text" name="input4" style="width:65px;" class="dateend"></span>
+  </p>
+  <p class="stdformbutton">
+    <button class="submit radius2">Save</button>
+  </p>
+<% end %>
+

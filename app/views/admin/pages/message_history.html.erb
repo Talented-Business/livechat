@@ -1,0 +1,71 @@
+<% content_for :menu do %>
+  <ul class="maintabmenu multipletabmenu">
+    <li>
+      <%= link_to "General", admin_statistics_path %>
+    </li>
+    <li>
+      <%= link_to "Leaderboard", admin_statistics_leaderboard_path %>
+    </li>
+    <li>
+      <%= link_to "Online Ops", admin_statistics_online_ops_path %>
+    </li>
+    <li  class="current">
+      <%= link_to "Message History", admin_statistics_message_history_path %>
+    </li>
+    <li>
+      <%= link_to "Payment for op", admin_statistics_payment_for_ops_path %>
+    </li>
+    <li>
+      <%= link_to "Notes History", admin_statistics_notes_history_path %>
+    </li>
+  </ul>
+<% end %>
+<div class="contenttitle radiusbottom0">
+  <h2 class="table"><span>Leaderboard</span></h2>
+</div><!--contenttitle-->	
+<table class="stdtable" border="0" cellpadding="0" cellspacing="0">
+  <colgroup>
+      <col class="con0">
+      <col class="con1">
+      <col class="con0">
+      <col class="con1">
+      <col class="con0">
+  </colgroup>
+
+  <thead>
+    <tr>
+      <th class="head0">Date</th>
+      <th class="head1">Sender</th>
+      <th class="head0">To</th>
+      <th class="head1">Message</th>
+      <th class="head0">Picture</th>
+    </tr>
+  </thead>
+  <tfoot>
+    <tr>
+      <th class="head0">Date</th>
+      <th class="head1">Sender</th>
+      <th class="head0">To</th>
+      <th class="head1">Message</th>
+      <th class="head0">Picture</th>
+    </tr>
+  </tfoot>
+  <tbody>
+    <tr>
+      <td>04/08/2013 18:25:02</td>
+      <td>Qing Han</td>
+      <td>User 1</td>
+      <td>Message content</td>
+      <td>&nbsp;</td>
+    </tr>
+    <% (1..10).each do  %>
+      <tr>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

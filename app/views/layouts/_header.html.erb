@@ -1,0 +1,20 @@
+<div class="header radius3">
+  <div class="headerinner">
+    <h3 style="width:150px; color:white;">Livetarot</h3>
+    <div class="headright"><!--headercolumn--><!--headercolumn-->
+      <div class="headercolumn" id="userPanel">
+        <a class="userinfo radius2" href="">
+          <%= image_tag("avatar.png") %>
+          <span><strong><%= current_operator.name  %> </strong></span>
+        </a>
+        <div class="userdrop">
+          <ul>
+            <li><a href="javascript:void(0)">Account Settings</a></li>
+            <li><%= link_to "Sign out", destroy_operator_session_path, :method => :delete %></li>
+          </ul>
+        </div><!--userdrop-->
+      </div><!--headercolumn-->
+    </div><!--headright-->
+
+  </div><!--headerinner-->
+</div>

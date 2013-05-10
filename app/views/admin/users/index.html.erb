@@ -1,0 +1,51 @@
+<% content_for :menu do %>
+  <ul class='maintabmenu'><li class='current'><a href='javascript:void(0)'>Users</a></li></ul>
+<% end %>
+    <div class="contenttitle radiusbottom0">
+      <h2 class="editor"><span>Users</span></h2>
+    </div>
+    <!--contenttitle-->
+    <table class="stdtable" border="0" cellpadding="0" cellspacing="0">
+      <colgroup>
+        <col class="con0">
+        <col class="con1">
+        <col class="con0">
+        <col class="con1">
+        <col class="con0">
+      </colgroup>
+      <thead>
+        <tr>
+          <th class="head0">&nbsp;</th>
+          <th class="head0" width="20%">User Name</th>
+          <th class="head1" width="20%">Display Name</th>
+          <th class="head0" width="23%">Email Address</th>
+          <th class="head1" width="15%">Sign Up date</th>
+          <th class="head0" width="15%">Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% if @users.count >0 %>
+          <% @users.each do |user| %>
+            <tr>
+              <td><%= image_tag user.avatar.url(:small) %></td>
+              <td><%= user.name %></td>
+              <td><%= user.display_name %></td>
+              <td class="center"><%= user.email %>&nbsp;</td>
+              <td>&nbsp;</td>
+              <td><%= link_to "Edit",edit_admin_user_path(user) %> &
+                  <% if user.block %>
+                    <%= link_to "Unblock", unblock_admin_user_path(user) %>
+                  <% else %>
+                    <%= link_to "Block", block_admin_user_path(user) %>
+                  <% end %>
+                    <%= link_to "Delete", delete_admin_user_path(user) %></td>
+            </tr>
+          <% end %>
+        <% else %>
+          <tr>
+            <td colspan="5"> No Users</td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table><br>
+  

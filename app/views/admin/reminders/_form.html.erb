@@ -1,0 +1,38 @@
+<%=  form_for([:admin,@reminder],:html => { :class => "stdform update_reminder" },:remote=>true) do |f| %>
+  <p>
+  	<%= f.label :name, :class => "control-label" %>
+    <span class="field">
+    	<%= f.text_field :name, :autofocus => true %> 
+    </span>
+  </p>
+  <p>
+  	<%= f.label :message, :class => "control-label" %>
+    <span class="field">
+    	<%= f.text_area :message,:rows =>10  %> 
+    </span>
+  </p>	
+  <p>
+    <%= f.label :inactivity, :class => "control-label" %>
+    <span class="field">
+      <%=  f.select :inactivity, options_for_select(@possible_days,@reminder.inactivity)  %>
+    </span>
+  </p>
+  <p>
+    <%= f.label :spread, :class => "control-label" %>
+    <span class="field">
+      <%=  f.select :spread, options_for_select([["20 minutes",20], ["40 minutes",40],["60 minutes",60],["90 minutes",90] ],@reminder.spread)  %>
+    </span>
+  </p>
+  <p>
+    <%= f.label :setting_time, :class => "control-label" %>
+    <span class="field">
+      <%=  f.select :setting_time, options_for_select([["01:00 AM",1], ["02:00 AM",2],["03:00 AM",3],["04:00 AM",4],["05:00 AM",5],["06:00 AM",6],["07:00 AM",7],["08:00 AM",8],["09:00 AM",9],["10:00 AM",10],["11:00 AM",11],["12:00 AM",12],
+        ["01:00 PM",13], ["02:00 PM",14],["03:00 PM",15],["04:00 PM",16],["05:00 PM",17],["06:00 PM",18],["07:00 PM",19],["08:00 PM",20],["09:00 PM",21],["10:00 PM",22],["11:00 PM",23],["12:00 PM",24]],@reminder.setting_time)  %>
+    </span>
+  </p>
+  <p>
+    <span class="field">
+    	<%= f.submit :class => "submit btn-primary" %> 
+    </span> 	
+  </p>	
+<%  end %>

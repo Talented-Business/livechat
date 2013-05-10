@@ -1,0 +1,11 @@
+$('#rota_slot').html("<%=escape_javascript(render :partial=>'rota_details_per_slot')%>");
+$('#operator_save').click(function(){
+  
+});
+<% unless @td_id.nil? %>
+  $('#<%= @td_id %>').replaceWith("<%=  escape_javascript(render :partial=>'slot')%>");
+<% end %>
+$( "input[name='op_name']" ).autocomplete({
+  source: operators
+});
+  

@@ -1,0 +1,8 @@
+<% if @user.nil? %>
+  alert("no users");
+<% else %>
+  $("#chatmessageinner").html('<%=j render "admin/chat_messages/chatmessages" %>');
+  $("#user_info").html('<%=j render "admin/chat_messages/userinfo" %>');
+  $("#chatmessage").animate({scrollTop: $("#chatmessage").prop("scrollHeight")});
+  //chat message, user info, operatorinfo
+<% end %>

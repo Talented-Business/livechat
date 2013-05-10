@@ -1,0 +1,82 @@
+<% content_for :menu do %>
+  <ul class="maintabmenu multipletabmenu">
+    <li>
+      <%= link_to "General", admin_statistics_path %>
+    </li>
+    <li>
+      <%= link_to "Leaderboard", admin_statistics_leaderboard_path %>
+    </li>
+    <li>
+      <%= link_to "Online Ops", admin_statistics_online_ops_path %>
+    </li>
+    <li>
+      <%= link_to "Message History", admin_statistics_message_history_path %>
+    </li>
+    <li class="current">
+      <%= link_to "Payment for op", admin_statistics_payment_for_ops_path %>
+    </li>
+    <li>
+      <%= link_to "Notes History", admin_statistics_notes_history_path %>
+    </li>
+  </ul>
+<% end %>
+<div class="contenttitle radiusbottom0">
+  <h2 class="table"><span>Leaderboard</span></h2>
+</div><!--contenttitle-->	
+<table class="stdtable" border="0" cellpadding="0" cellspacing="0">
+  <colgroup>
+      <col class="con0">
+      <col class="con1">
+      <col class="con0">
+      <col class="con1">
+      <col class="con0">
+  </colgroup>
+
+  <thead>
+    <tr>
+      <th class="head0">Op</th>
+      <th class="head1">Total Msg Sent</th>
+      <th class="head0">Payscale</th>
+      <th class="head1">Value</th>
+      <th class="head0">Sub Total</th>
+      <th class="head0">Total Due</th>
+    </tr>
+  </thead>
+  <tfoot>
+    <tr>
+      <th class="head0">Op</th>
+      <th class="head1">Total Msg Sent</th>
+      <th class="head0">Payscale</th>
+      <th class="head1">Value</th>
+      <th class="head0">Sub Total</th>
+      <th class="head0">Total Due</th>
+    </tr>
+  </tfoot>
+  <tbody>
+    <tr>
+      <td>op1</td>
+      <td>50</td>
+      <td>10 * A</td>
+      <td>10 * 0.05</td>
+      <td>0.50p</td>
+      <td>3.30p</td>
+    </tr>
+    <tr>
+      <td>op2</td>
+      <td>150</td>
+      <td>100 * C</td>
+      <td>40 * 0.07</td>
+      <td>2.80p</td>
+      <td>10.0p</td>
+    </tr>
+    <% (1..10).each do  %>
+      <tr>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

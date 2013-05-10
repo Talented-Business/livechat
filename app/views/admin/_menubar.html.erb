@@ -1,0 +1,48 @@
+<div class="mainleftinner">         
+  <div class="leftmenu">
+    <ul>
+      <% if current_operator.has_role? :admin or current_operator.has_role? :superadmin %>
+        <li class="<%= compare_url(admin_operators_path) %>">
+          <%= link_to "<span><em>Operators</em></span>".html_safe, admin_operators_path, :class=>"users" %>
+        </li>  
+      <% end %>
+      <% if current_operator.has_role? :admin or current_operator.has_role? :superadmin %>
+        <li class="<%= compare_url(admin_users_path) %>">
+          <%= link_to "<span><em>Users</em></span>".html_safe, admin_users_path, :class=>"editor" %>
+        </li>
+      <% end %>
+      <% if current_operator.has_role? :admin or current_operator.has_role? :superadmin %>
+        <li class="<%= compare_url(rota_index_admin_schedules_path) %>">
+          <%= link_to "<span><em>Rota</em></span>".html_safe, rota_index_admin_schedules_path, :class=>"record" %>
+        </li>
+      <% end %>
+      <li class="<%= compare_url(admin_schedules_path) %>">
+        <%= link_to "<span><em>Schedule</em></span>".html_safe, admin_schedules_path, :class=>"record" %>
+      </li>
+      <li class="<%= compare_url(admin_messages_path) %>">
+        <%= link_to "<span><em>Internal Message</em></span>".html_safe, admin_messages_path, :class=>"elements" %>
+      </li>
+      <% if current_operator.has_role? :admin or current_operator.has_role? :superadmin %>
+        <li class="<%= compare_url(admin_skills_path) %>">
+          <%= link_to "<span><em>Skills</em></span>".html_safe, admin_skills_path, :class=>"help" %>
+        </li>
+      <% end %>
+      <% if current_operator.has_role? :admin or current_operator.has_role? :superadmin %>
+        <li class="<%= compare_url(admin_pictures_path) %>">
+          <%= link_to "<span><em>Pictures</em></span>".html_safe, admin_pictures_path, :class=>"photos" %>
+        </li>
+      <% end %>
+      <% if current_operator.has_role? :admin or current_operator.has_role? :superadmin%>
+        <li class="<%= compare_url(admin_systemmetas_path) %>">
+          <%= link_to "<span><em>Settings</em></span>".html_safe, admin_systemmetas_path, :class=>"grid" %>
+        </li>
+      <% end %>
+      <% if current_operator.has_role? :superadmin %>
+        <li  class="<%= compare_url(admin_statistics_path) %>">
+          <%= link_to "<span><em>Statistics</em></span>".html_safe, admin_statistics_path, :class=>"dashboard" %>
+        </li>
+      <% end %>
+    </ul>
+  </div><!--leftmenu-->
+  <div id="togglemenuleft"><a></a></div>
+</div>

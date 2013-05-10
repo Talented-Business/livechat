@@ -1,0 +1,136 @@
+<% content_for :menu do %>
+  <ul class="maintabmenu multipletabmenu">
+    <li>
+      <%= link_to "Real Identification", edit_admin_operator_path(@operator) %>
+    </li>
+    <li class="current">
+      <%= link_to "Session History", session_history_admin_operator_path(@operator) %>
+    </li>
+    <li>
+      <%= link_to "Attendance History", attendance_history_admin_operator_path(@operator) %>
+    </li>
+    <li>
+      <%= link_to "Display Profile", profile_admin_operator_path(@operator) %>
+    </li>
+  </ul>
+<% end %>
+<div class="contenttitle">
+  <h2 class="form"><span>Sessions History</span></h2>
+</div>
+<%= form_tag session_history_admin_operator_path(@operator),:method=>"get",:class=>'stdform form-filter' do %>
+  <span>Start Date</span><input name="start_date" class="date-pick filter" value="<%= @start_date%>">
+  <span>End Date</span><input name="end_date" class="date-pick filter" value="<%= @end_date%>">
+  <span>User</span>
+  <%= select_tag("chat_user", options_from_collection_for_select(@chat_users,"id","name",@chat_user_id),:class=>"filter", :prompt => "All") %>
+  <button type="submit">Filter</button>
+<% end %>  
+<table cellspacing="0" cellpadding="0" border="0" class="stdtable">
+  <colgroup>
+    <col class="con0">
+    <col class="con1">
+    <col class="con0">
+    <col class="con1">
+    <col class="con0">
+    <col class="con1">
+  </colgroup>
+  <thead>
+    <tr>
+      <th class="head0">Date</th>
+      <th class="head1">Start</th>
+      <th class="head0">End</th>
+      <th class="head1">Duration</th>
+      <th class="head0">User Name</th>
+      <th class="head0">Last IP Address</th>
+      <th class="head1">Messages</th>
+    </tr>
+  </thead>
+  <tfoot>
+    <tr>
+      <th class="head0">Date</th>
+      <th class="head1">Start</th>
+      <th class="head0">End</th>
+      <th class="head1">Duration</th>
+      <th class="head0">User Name</th>
+      <th class="head0">Last IP Address</th>
+      <th class="head1">Messages</th>
+    </tr>
+  </tfoot>
+  <tbody id="session_history">
+    <% @sessions.each do |s| %>
+      <tr>
+        <td><%= s.start.to_date%>&nbsp;</td>
+        <td><%= s.start.strftime("%T")%>&nbsp;</td>
+        <td><%= s.end.strftime("%T") unless s.end.nil? %>&nbsp;</td>
+        <td><%= diff_duration((s.end-s.start).to_i) unless s.end.nil?%> &nbsp;</td>
+        <td><%= s.user.name %>&nbsp;</td>
+        <td><%= s.get_remote_ip %>&nbsp;</td>
+        <td><%= s.chat_messages.count%>&nbsp;<span style="display: none;"><%= s.id %></span></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<div id="modal-messages-history">
+  <div class="contenttitle">
+    <h2 class="form"><span>Message History</span></h2>
+  </div>
+  <table cellspacing="0" cellpadding="0" border="0" class="stdtable">
+    <colgroup>
+      <col class="con0">
+      <col class="con1">
+      <col class="con0">
+      <col class="con1">
+      <col class="con0">
+    </colgroup>
+    <thead>
+      <tr>
+        <th class="head0">Date</th>
+        <th class="head1">Sender</th>
+        <th class="head0">To</th>
+        <th class="head1">Message</th>
+      </tr>
+    </thead>
+    <tfoot>
+      <tr>
+        <th class="head0">Date</th>
+        <th class="head1">Sender</th>
+        <th class="head0">To</th>
+        <th class="head1">Message</th>
+      </tr>
+    </tfoot>
+    <tbody>
+    </tbody>
+  </table>
+</div>  
+<script>
+  var message_history = function(key){
+    temp_xhr = $.ajax({
+      url : '<%= message_history_admin_operators_path%>?key='+key,
+      cache: false,
+      dataType: "json",
+      success: function(response){
+        var s = "", i=0, m=0;
+        for(k in response["messages"]){
+          i++;
+          message = response["messages"][k];
+          s += '<tr>'+
+                 '<td>'+message.created_at+'</td>'+
+                 '<td>'+message.sender+'</td>'+
+                 '<td>'+message.to+'</td>'+
+                 '<td>'+message.message+'</td>'+
+               '</tr>';
+        }
+        if(i>0){
+          $('#modal-messages-history tbody').html(s);
+        }else{
+          $('#modal-messages-history tbody').html('');
+        }
+        $('#modal-messages-history').dialog("open");
+      }
+    });
+  };  
+  $(document).ready(function(){
+    $("#session_history tr").click(function(){
+      message_history($(this).find("span").html());
+    });    
+  })
+</script>  

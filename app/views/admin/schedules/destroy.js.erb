@@ -1,0 +1,4 @@
+$('#<%=@element_id%>').html("<%=escape_javascript(render :partial=>'book')%>").addClass("bookable").removeClass("booked");
+$('#<%=@element_id%>').find(".bookable_span").click(function(){
+  $(this).find("form").submit();
+});

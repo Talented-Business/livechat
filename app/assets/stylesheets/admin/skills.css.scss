@@ -1,0 +1,15 @@
+.control-group{
+  padding:5px;
+  .controls{
+    input, textarea, select{
+      width:270px;
+    }
+  }
+  .control-label{
+    text-align: left;
+  }
+}
+#new_skill, .update_skill{
+  margin: auto;
+  width: 500px;
+}

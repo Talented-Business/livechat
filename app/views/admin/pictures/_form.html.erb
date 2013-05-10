@@ -1,0 +1,30 @@
+<%=  form_for([:admin,@picture],:html => { :class => "stdform update_picture", :multipart => true }) do |f| %>
+  <div class="picture">
+    <div class="control-group">
+      <%= f.label :image, :class => "control-label" %>
+      <div class="controls">
+        <%= f.file_field  :image, :placeholder => "Image File" %> 
+      </div>  	
+    </div>	
+  </div>	  
+  <div class="content">
+    <div class="control-group">
+      <%= f.label :name, :class => "control-label" %>
+      <div class="controls">
+        <%= f.text_field :name, :autofocus => true %> 
+      </div>  	
+    </div>	
+    <div class="control-group">
+      <%= f.label :description, :class => "control-label" %>
+      <div class="controls">
+        <%= f.text_area :description,:rows =>10  %> 
+      </div>  	
+    </div>	
+  </div>	 
+  <div class="clear"></div>
+	<div class="control-group"> 
+    <div class="controls">
+    	<%= f.submit :class => "submit btn-primary" %> 
+    </div>  	
+  </div>	
+<%  end %>

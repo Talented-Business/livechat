@@ -1,0 +1,59 @@
+<div class="contenttitle radiusbottom0">
+  <h2 class="table"><span>Detail data of selected slot(<%= @number.to_s+":00 "+@number.to_s+":59 of "+@thedate.strftime("%a, %d/%m") %> )</span></h2>
+</div>  
+<div class="tableoptions">
+  <%= form_tag add_operator_admin_schedules_path, :remote=>true do %>
+  <% today = Date.today 
+    if today < @thedate or (today == @thedate and Time.now.strftime("%H").to_i < @number)  %>
+      Op Count<input type="text" name="op_count" value="<%= @op_count.to_s %>">
+      Op Name<input type="text" autocomplete="off"  class="focus" maxlength="20" placeholder="Name" name="op_name">
+      <input type="hidden" name="thedate" value="<%= @thedate %>">
+      <input type="hidden" name="number" value="<%= @number %>">
+      <button class="radius3" id="operator_save" type="submit">Add Op Manually</button>
+    <% else %>  
+      Op Count<input type="text" name="op_count" value="<%= @op_count.to_s %>" disabled>
+    <% end %>  
+  <% end %>    
+</div>  
+<table cellspacing="0" cellpadding="0" border="0" class="stdtable stdtablecb" id="table1">
+  <thead>
+    <tr>
+      <th class="head1">Login number</th>
+      <th class="head0">Op name</th>
+      <th class="head1">Email Address</th>
+      <th class="head0">Status(Attendance, Late, Absence, Booked)</th>
+      <th class="head1">Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @schedules_per_slot.each do |schedule| %>
+      <% next if schedule.operator_id == 0 
+        today = Date.today %>
+      <tr>
+        <td><%= schedule.operator.name  %>&nbsp;</td>
+        <td><%= schedule.operator.display_name  %>&nbsp;</td>
+        <td><%= schedule.operator.email  %></td>
+        <td><%= schedule.current_status  %>&nbsp;</td>
+        <td><%= 
+              if today < schedule.thedate or (today == schedule.thedate and Time.now.strftime("%H").to_i < schedule.number)
+                case schedule.current_status
+                when "booked"
+                  link_to("Cancel",cancel_admin_schedules_path(schedule),:remote=>true ) 
+                when "cancel_by_admin"
+                  link_to("Active",cancel_admin_schedules_path(schedule),:remote=>true ) 
+                end  
+              end
+          %>&nbsp;</td>
+      </tr>
+    <% end %>
+    <% [1,2,3].each do |index| %>
+      <tr>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+      </tr>
+    <% end %>  
+  </tbody>
+</table>  

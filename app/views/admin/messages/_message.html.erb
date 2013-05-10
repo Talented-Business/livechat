@@ -1,0 +1,20 @@
+<%
+align = "right" 
+sender = message.sender	 
+unread = message.unread 
+if message.sender == current_operator 
+		align = "left pull-right"
+	unread = false
+end 
+%>
+<div class="popover <%= align %> message_box message-popover clearfix" id="message_box_<%= message.id %>">
+  <div class ="message-user-info">
+    <h4 class="popover-title">
+        <%= sender.name %>
+    </h4>
+    <div class="pull-right message-time"><small><%= time_ago_in_words(message.created_at) %></small></div>
+  </div>
+  <div class="message-text popover-content <%= unread ? "" : "muted" %> ">
+    <p><%= message.message %></p>
+  </div>      
+</div>
