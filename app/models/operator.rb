@@ -69,7 +69,7 @@ class Operator < ActiveRecord::Base
       "operator_name"         =>login_display_name,
       "short_bio"=>login_short_bio,
       "online_offline"=>true,
-      "avatar"=>root_url+self.display_avatar.url(:small, false),
+      "avatar"=>root_url+self.display_avatar.url(:original, false),
       "language"=>self.languages,
       "rate"=>(rates[0] + rates[1] +rates[2] + rates[3])/4
     }

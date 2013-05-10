@@ -11,6 +11,7 @@
 /db/*.sqlite3
 
 # Ignore all logfiles and tempfiles.
+/public/system/
 /log/*.log
 /tmp
 /nbproject
