@@ -80,10 +80,10 @@ class Admin::ChatMessagesController < ApplicationController
     users.each do |user|
       _user = Hash.new
       _user['id'] = user.id
-      if user.session_update.nil?
+      if user.last_message(op).nil?
         _user['waiting'] = time_ago_in_words(user.created_at.to_datetime)#((DateTime.now - user.created_at.to_datetime)*1.days).to_i
       else
-        _user['waiting'] = time_ago_in_words(user.session_update.to_datetime)#((DateTime.now - user.created_at.to_datetime)*1.days).to_i
+        _user['waiting'] = time_ago_in_words(user.last_message(current_operator).to_datetime)#((DateTime.now - user.created_at.to_datetime)*1.days).to_i
       end      
       _user['name'] = user.name
       chat_users.push  _user

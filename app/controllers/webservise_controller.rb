@@ -180,7 +180,7 @@ class WebserviseController < ApplicationController
     credit_count = @chat_user.credits unless @chat_user.credits.nil?
     userinfo = {
       "user_name"=>@chat_user.name,
-      "avatar"=>root_url+@chat_user.avatar.url(:small, false),
+      "avatar"=>root_url+@chat_user.avatar.url(:original, false),
       "credit_count"=> credit_count
     }
     render :json=>{"user"=>userinfo,"status"=>"200"},:status =>200

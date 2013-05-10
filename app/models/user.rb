@@ -153,6 +153,10 @@ class User < ActiveRecord::Base
     s = Session.where("user_id = ? and operator_id = ?",self.id, op.id).last
     return s
   end
+  def last_message(op)
+    s = getlastmessage(op)
+    returne s.chat_messages.last
+  end
   private
   def generate_token(column)
     begin
