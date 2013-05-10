@@ -35,7 +35,7 @@ class User < ActiveRecord::Base
     op_ids = Session.select(:operator_id).uniq.where("user_id = ?",self.id).order("created_at ASC")
     recent_operators = []
     op_ids.each do |op_id|
-      operator = Operator.find(op_id)
+      operator = Operator.find(op_id.operator_id)
       recent_operators.push operator.info(root_url)
     end
     return recent_operators
