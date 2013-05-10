@@ -32,7 +32,7 @@ class User < ActiveRecord::Base
     end
   end
   def recentoperators(root_url,t = DateTime.now)
-    op_ids = Session.select(:operator_id).uniq.where("user_id = ?",self.id).order("created_at ASC")
+    op_ids = Session.select(:operator_id).uniq.where("user_id = ?",self.id)#.order("created_at ASC")
     recent_operators = []
     op_ids.each do |op_id|
       operator = Operator.find(op_id.operator_id)
