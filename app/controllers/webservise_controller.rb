@@ -127,7 +127,7 @@ class WebserviseController < ApplicationController
         "operator_name"=>login_display_name,
         "short_bio"=>login_short_bio,
         "online_offline"=>true,
-        "avatar"=>root_url+@operator.avatar.url(:small, false),
+        "avatar"=>root_url+@operator.display_avatar.url(:small, false),
         "long_bio"=>login_long_bio,
         #"credit"=>@operator.credit,
         #"credit_bonus"=>@operator.credit_bonus,

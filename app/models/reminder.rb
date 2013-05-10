@@ -20,7 +20,7 @@ class Reminder < ActiveRecord::Base
       t = t+":00 AM"
     end
   end
-  def self.push_message
+  def push_message
     type = '1001'
     users = User.where(:block=>false)
     android_tokens = []
@@ -53,12 +53,13 @@ class Reminder < ActiveRecord::Base
       end
     end
   end
-  def self.test_push_message
-    (0..100).each do |i|
-      if i >50
-        puts i
-        return
+  def self.send_message
+    reminders = Reminder.all
+    reminders.each do |r|
+      t = r.updated_at.to_date + r.setting_time*1.hours + r.inactivity.to_i.days
+      if DateTime.now > t
+        r.push_message
       end
-    end
+    end    
   end
 end
