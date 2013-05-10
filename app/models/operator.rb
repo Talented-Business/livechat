@@ -16,7 +16,7 @@ class Operator < ActiveRecord::Base
   has_and_belongs_to_many :skills, :join_table => :operators_skills
   validates :password, :confirmation => true,    :unless => Proc.new { |a| a.password.blank? }
   validates :name, :presence => true, :uniqueness => true
-  has_attached_file :avatar, styles: { medium: "65x65#", small: "40x40#" },
+  has_attached_file :avatar, styles: { medium: "128x128#", small: "40x40#" },
                              default_url: 'avatar3.png',
                              path: ":rails_root/public/system/:class/avatar/:id/:style",
                              url: "system/:class/avatar/:id/:style"
@@ -70,6 +70,7 @@ class Operator < ActiveRecord::Base
       "short_bio"=>login_short_bio,
       "online_offline"=>true,
       "avatar"=>root_url+self.display_avatar.url(:original, false),
+      "thumbnail"=>root_url+self.display_avatar.url(:medium, false),
       "language"=>self.languages,
       "rate"=>(rates[0] + rates[1] +rates[2] + rates[3])/4
     }
