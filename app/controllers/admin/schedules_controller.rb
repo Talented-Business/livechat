@@ -214,7 +214,13 @@ class Admin::SchedulesController < ApplicationController
     begin
       if session.has_key?(:chat_user_id)
         @chat_user = User.find(session[:chat_user_id]) 
-        @chat_messages = ChatMessage.where("created_at >= ? and user_id = ? and operator_id = ?",session[:read_time]-1.days,session[:chat_user_id],current_operator.id)
+        #@chat_messages = ChatMessage.where("created_at >= ? and user_id = ? and operator_id = ?",session[:read_time]-1.days,session[:chat_user_id],current_operator.id)
+        active_session = Session.active_session(current_operator,@chat_user)
+        if active_session.nil?
+          @chat_messages = []
+        else
+          @chat_messages = active_session.chat_messages
+        end
         @notes = Note.where("viewable = true and user_id = ? and operator_id = ?",session[:chat_user_id],current_operator.id)
       end
     rescue

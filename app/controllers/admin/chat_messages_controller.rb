@@ -13,7 +13,13 @@ class Admin::ChatMessagesController < ApplicationController
       session[:chat_user_id] = params[:user_id]
     end
     @chat_user = User.find(session[:chat_user_id])
-    @chat_messages = ChatMessage.where("created_at >= ? and user_id = ? and operator_id = ?",session[:read_time]-1.days,session[:chat_user_id],current_operator.id)
+    #@chat_messages = ChatMessage.where("created_at >= ? and user_id = ? and operator_id = ?",session[:read_time]-1.days,session[:chat_user_id],current_operator.id)
+    active_session = Session.active_session(current_operator,@chat_user)
+    if active_session.nil?
+      @chat_messages = []
+    else
+      @chat_messages = active_session.chat_messages
+    end
     session[:read_time] = DateTime.now
     respond_to do |format|
       format.js 
@@ -79,24 +85,20 @@ class Admin::ChatMessagesController < ApplicationController
   def get_chat_users
     users = User.all#where("session_update >= ?", DateTime.now - 1.hours) 
     chat_users = []
-    users.each do |user|
-      _user = Hash.new
-      _user['id'] = user.id
-      if user.last_message(current_operator).nil?
-        _user['waiting'] = time_ago_in_words(user.created_at.to_datetime)
-        _user['online'] = false
-      else
-        _user['waiting'] = time_ago_in_words(user.last_message(current_operator).created_at.to_datetime)
-        _user['online'] = true
-      end      
-      _user['name'] = user.name
-      chat_users.push  _user
-    end
-    new_messages = []
     unless session.has_key?(:chat_user_id)
       session[:chat_user_id] = User.first.id
       session[:chat_user_id] = ChatMessage.last.user.id unless ChatMessage.last.nil?
+      _user = Hash.new
     end
+    if session.has_key?(:chat_user_id)
+      user = User.find(session[:chat_user_id])
+      add_user(chat_users, user)
+    end
+    users.each do |user|
+      add_user(chat_users, user)
+    end
+    chat_users.uniq!
+    new_messages = []
     if session.has_key?(:read_time) 
       #new_chats = ChatMessage.where("created_at >= ? and user_id = ?",session[:read_time],session[:chat_user_id])
       if session.has_key?(:new_message) 
@@ -107,7 +109,7 @@ class Admin::ChatMessagesController < ApplicationController
       new_chats.each do |chat|
         new_message = Hash.new
         new_message['message'] = chat.message
-        new_message['name'] = chat.user.name
+        new_message['name'] = chat.user.display_name
         #new_message.waiting = DateTime.now - chat.created_at
         new_message['created_at'] = chat.created_at
         new_messages.push  new_message
@@ -126,5 +128,18 @@ class Admin::ChatMessagesController < ApplicationController
       format.json { head :no_content }
     end
   end
-  
+  private
+  def add_user(chat_users, user)
+    _user = Hash.new
+    _user['id'] = user.id
+    if user.last_message(current_operator).nil?
+      _user['waiting'] = ""#time_ago_in_words(user.created_at.to_datetime)
+      _user['online'] = false
+    else
+      _user['waiting'] = time_ago_in_words(user.last_message(current_operator).created_at.to_datetime)
+      _user['online'] = true
+    end      
+    _user['name'] = user.display_name
+    chat_users.push  _user    
+  end
 end

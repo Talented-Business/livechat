@@ -34,7 +34,7 @@
               <td><%= operator.name %></td>
               <td><%= operator.display_name %>&nbsp;</td>
               <td class="center"><%= operator.email %>&nbsp;</td>
-              <td>&nbsp;</td>
+              <td><%= operator.created_at %>&nbsp;</td>
               <td><%= link_to "Edit",edit_admin_operator_path(operator) %> &
                   <% if operator.block %>
                     <%= link_to "Unblock", unblock_admin_operator_path(operator) %>&
