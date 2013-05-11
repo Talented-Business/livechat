@@ -191,6 +191,7 @@ class WebserviseController < ApplicationController
     userinfo = {
       "user_name"=>@chat_user.name,
       "avatar"=>root_url+@chat_user.avatar.url(:original, false),
+      "thumbnail"=>root_url+@chat_user.avatar.url(:medium, false),
       "credit_count"=> credit_count
     }
     render :json=>{"user"=>userinfo,"status"=>"200"},:status =>200
