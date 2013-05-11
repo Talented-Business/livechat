@@ -83,7 +83,8 @@ class Admin::ChatMessagesController < ApplicationController
     render :js => "alert('failed');" 
   end
   def get_chat_users
-    users = User.all#where("session_update >= ?", DateTime.now - 1.hours) 
+    #users = User.all#where("session_update >= ?", DateTime.now - 1.hours) 
+    active_sessions = current_operator.active_sessions
     chat_users = []
     unless session.has_key?(:chat_user_id)
       session[:chat_user_id] = User.first.id
@@ -94,7 +95,8 @@ class Admin::ChatMessagesController < ApplicationController
       user = User.find(session[:chat_user_id])
       add_user(chat_users, user)
     end
-    users.each do |user|
+    active_sessions.each do |s|
+      user = s.user
       add_user(chat_users, user)
     end
     chat_users.uniq!
