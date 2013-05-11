@@ -95,7 +95,12 @@ class WebserviseController < ApplicationController
   end
 
   def getlastagent
-    render :json=>{"operator"=>@chat_user.last_chat_agent.info(root_url),:status =>200}, :status =>200
+    if @chat_user.last_chat_agent.nil?
+      op = ""
+    else
+      op = @chat_user.last_chat_agent.info(root_url)
+    end 
+    render :json=>{"operator"=>op,:status =>200}, :status =>200
   end
 
   def getfavoriteoperators
@@ -199,10 +204,10 @@ class WebserviseController < ApplicationController
   
   def setrate
     rate = Rate.where(:operator_id => @operator.id, :user_id => @chat_user.id).first_or_initialize
-    rate.skill = params[:skill]
-    rate.communication = params[:communication]
-    rate.friendliness = params[:friendliness]
-    rate.recommend = params[:recommend]
+    rate.skill = params[:rate_skill]
+    rate.communication = params[:rate_communication]
+    rate.friendliness = params[:rate_friendliness]
+    rate.recommend = params[:rate_recommend]
     rate.save
     render :json=>{"result"=>"Successfully updated",:status =>200},:status =>200
   end

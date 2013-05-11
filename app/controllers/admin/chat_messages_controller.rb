@@ -84,7 +84,7 @@ class Admin::ChatMessagesController < ApplicationController
         _user['waiting'] = time_ago_in_words(user.created_at.to_datetime)
         _user['online'] = false
       else
-        _user['waiting'] = time_ago_in_words(user.last_message(current_operator).to_datetime)
+        _user['waiting'] = time_ago_in_words(user.last_message(current_operator).created_at.to_datetime)
         _user['online'] = true
       end      
       _user['name'] = user.name
