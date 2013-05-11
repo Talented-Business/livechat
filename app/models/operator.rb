@@ -173,6 +173,14 @@ class Operator < ActiveRecord::Base
   def active_sessions
     self.sessions.where(:end =>nil)
   end
+  def chat_messages_count(user)
+    active_session = Session.active_session(self,user)
+    if active_session.nil?
+      return 0
+    else
+      return active_session.chat_messages.where(:direction=>true).count
+    end
+  end
   private
   def add_role_record(record)
     #user.add_role :operator unless user.has_role? :operator or user.has_role? :admin or user.has_role? :super_admin

@@ -54,6 +54,9 @@ class Session < ActiveRecord::Base
       end
     end
   end
+  def self.active_session(op, user)
+    active_session = where("operator_id = ? and user_id = ?",op.id, user.id).where(:end=>nil).last
+  end
   private
   def save_history
     chats = []

@@ -53,6 +53,8 @@ class Admin::ChatMessagesController < ApplicationController
       @chat_message.direction = true
       @chat_message.operator = current_operator
       @chat_message.user = @user
+      active_session = Session.active_session(current_operator,@user)
+      @chat_message.session = active_session unless active_session.nil?
       msg = Hash.new
       msg['message'] = params[:chat_message][:message]
       msg['datetime'] = DateTime.now.to_s

@@ -43,7 +43,7 @@
         <p>Login Name: <%= current_operator.name%><br>
         Real Name:<%= current_operator.real_name%><br>
         Display Name:<%= current_operator.display_name%><br>
-        Message Sent:<%= 25%></p>
+        Message Sent:<span id="operator_sent_message_count"><%= current_operator.chat_messages_count(@chat_user)if session.has_key?(:chat_user_id)%></span></p>
       </div><!--widgetcontent-->
     </div>
   </div>

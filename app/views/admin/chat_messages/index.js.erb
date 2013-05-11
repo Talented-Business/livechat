@@ -1,8 +1,10 @@
 <% if @user.nil? %>
   alert("no users");
+  $('#operator_sent_message_count').html('0');
 <% else %>
   $("#chatmessageinner").html('<%=j render "admin/chat_messages/chatmessages" %>');
   $("#user_info").html('<%=j render "admin/chat_messages/userinfo" %>');
   $("#chatmessage").animate({scrollTop: $("#chatmessage").prop("scrollHeight")});
+  $('#operator_sent_message_count').html('<%= current_operator.chat_messages_count(@user)%>');
   //chat message, user info, operatorinfo
 <% end %>
