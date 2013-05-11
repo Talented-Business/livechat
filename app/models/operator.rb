@@ -46,7 +46,7 @@ class Operator < ActiveRecord::Base
     Operator.with_all_roles({:name => :admin})
   end
   def self.senders(operator)
-    Operator.where("block = false and id !=? ", operator.id ).order(:name => :asc)
+    Operator.where("block = false and id !=? ", operator.id ).order("name ASC")
   end
   def self.operators
     operators = Operator.where(:block => false)
