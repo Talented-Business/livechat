@@ -83,6 +83,7 @@
               <div class="controls">
                 <%= f.file_field :avatar, :autofocus => true %> 
               </div>  	
+              <%= image_tag @operator.avatar.url(:original, false) %>
             </div>	
           </td>
         </tr>
