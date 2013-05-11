@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130508091957) do
+ActiveRecord::Schema.define(:version => 20130511045413) do
 
   create_table "apn_devices", :force => true do |t|
     t.string   "token",              :default => "", :null => false
@@ -172,14 +172,13 @@ ActiveRecord::Schema.define(:version => 20130508091957) do
   end
 
   create_table "rates", :force => true do |t|
-    t.integer  "operator_id"
-    t.integer  "user_id"
     t.decimal  "skill",         :precision => 10, :scale => 0
     t.decimal  "communication", :precision => 10, :scale => 0
     t.decimal  "friendliness",  :precision => 10, :scale => 0
     t.decimal  "recommend",     :precision => 10, :scale => 0
     t.datetime "created_at",                                   :null => false
     t.datetime "updated_at",                                   :null => false
+    t.integer  "session_id"
   end
 
   create_table "reminders", :force => true do |t|

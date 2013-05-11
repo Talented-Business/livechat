@@ -5,6 +5,7 @@ class Session < ActiveRecord::Base
   attr_accessible :end, :start, :chat_history
   validates :start, :presence => true
   validate :start_end_datetime
+  has_one   :rate
   serialize :chat_history, Array
 
   def start_end_datetime

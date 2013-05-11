@@ -8,7 +8,6 @@ class User < ActiveRecord::Base
                              path: ":rails_root/public/system/:class/avatar/:id/:style",
                              url: "/system/:class/avatar/:id/:style"
   has_many  :chat_messages, :dependent => :destroy      
-  has_many  :rates, :dependent => :destroy
   has_many  :notes, :dependent => :destroy      
   has_many  :sessions, :dependent => :destroy      
   validates :name, :presence => true, :uniqueness => true
@@ -28,6 +27,10 @@ class User < ActiveRecord::Base
     unless last_chat.nil?
       return last_chat.operator
     else
+      last_session = self.sessions.last
+      unless last_session.nil?
+        return last_session.operator
+      end
       return nil
     end
   end

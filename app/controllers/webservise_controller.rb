@@ -204,11 +204,14 @@ class WebserviseController < ApplicationController
   end
   
   def setrate
-    rate = Rate.where(:operator_id => @operator.id, :user_id => @chat_user.id).first_or_initialize
+    last_session = Session.where("operator_id = ? and user_id = ?",@operator.id, @chat_user.id).last
+    rate = last_session.rate
+    rate = Rate.where(:session_id => last_session.id).first_or_initialize if rate.nil?
     rate.skill = params[:rate_skill]
     rate.communication = params[:rate_communication]
     rate.friendliness = params[:rate_friendliness]
     rate.recommend = params[:rate_recommend]
+    rate.operator = @operator
     rate.save
     render :json=>{"result"=>"Successfully updated",:status =>200},:status =>200
   end
