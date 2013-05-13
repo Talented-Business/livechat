@@ -30,4 +30,4 @@ production:
   database: adlectic_production
   pool: 5
   username: postgres
-  password: adfafasfasdfsdfecadfasd
+  password: asadsaf
