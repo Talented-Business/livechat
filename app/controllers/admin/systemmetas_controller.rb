@@ -73,6 +73,7 @@ class Admin::SystemmetasController < ApplicationController
         saved = msg.save      
       end  
     end
+=begin    
     unless user_daily_message ==  Systemmeta.get_setting("user_daily_message")
       setting = Systemmeta.find_or_initialize_by_meta_key("_user_daily_message")
       setting.update_attributes(
@@ -88,6 +89,7 @@ class Admin::SystemmetasController < ApplicationController
       users = User.where(:daily_message=>false)
       User.daily_messages(user_daily_message)
     end
+=end    
     if update 
       render :js=>"alert('Successfully updated')"
     else
