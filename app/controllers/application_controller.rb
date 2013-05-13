@@ -1,6 +1,6 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
-  before_filter :check_sessions_for_op
+  #before_filter :check_sessions_for_op
   def current_ability
     current_operator.ability
   end
@@ -9,6 +9,6 @@ class ApplicationController < ActionController::Base
     Session.check_sessions 
   end
   def check_sessions_for_op
-    true #current_operator.check_sessions if current_operator
+    current_operator.check_sessions if current_operator
   end
 end
