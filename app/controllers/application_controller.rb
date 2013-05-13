@@ -1,6 +1,6 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
-  #before_filter :check_sessions_for_op
+  before_filter :check_sessions_for_op
   def current_ability
     current_operator.ability
   end
