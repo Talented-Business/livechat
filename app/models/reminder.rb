@@ -60,6 +60,14 @@ class Reminder < ActiveRecord::Base
       if DateTime.now > t
         r.push_message
       end
-    end    
+    end  
+    key = "reminder"
+    value = DateTime.now
+    value = value.to_s
+    setting = Systemmeta.find_or_initialize_by_meta_key(key)
+    setting.update_attributes(
+      :meta_key => key,
+      :meta_value => value
+    )
   end
 end
