@@ -9,6 +9,6 @@ class ApplicationController < ActionController::Base
     Session.check_sessions 
   end
   def check_sessions_for_op
-    current_operator.check_sessions if current_operator
+    true #current_operator.check_sessions if current_operator
   end
 end
